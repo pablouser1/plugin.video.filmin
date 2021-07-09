@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<settings version="1">
+  <section id="plugin.video.filmin">
+    <category id="login" label="40000">
+      <group id="account" label="40001">
+        <setting id="username" type="string" label="40002">
+          <level>0</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="password" type="string" label="40003">
+          <level>0</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+      </group>
+      <group id="tokens" label="40004">
+        <setting id="access_token" type="string" label="40005">
+          <level>2</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="refresh_token" type="string" label="40006">
+          <level>2</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+      </group>
+    </category>
+  </section>
+</settings>

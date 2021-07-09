@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.filmin" name="Filmin" version="1.0.0" provider-name="pablouser1">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.requests" version="2.22.0+matrix.1" />
+    <import addon="script.module.inputstreamhelper" version="0.4.2" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Use Filmin on Kodi</summary>
+    <description lang="en_GB">NON-OFFICIAL client for watching content of Filmin</description>
+    <summary lang="es_ES">Utiliza Filmin en Kodi</summary>
+    <description lang="es_ES">Cliente NO OFICIAL para visualizar contenido de Filmin</description>
+    <language>es</language>
+    <platform>all</platform>
+    <license>GPL-3.0-or-later</license>
+    <website>https://github.com/pablouser1/plugin.video.filmin</website>
+    <email>pferreiromero@gmail.com</email>
+    <source>http://github.com/pablouser1/plugin.video.filmin</source>
+    <news>
+      v1.0.0 (09/07/2021)
+      [new] First commit
+    </news>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>

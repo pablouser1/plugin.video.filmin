@@ -1,0 +1,45 @@
+# Kodi Media Center language file
+# Addon Name: Filmin
+# Addon id: plugin.video.filmin
+# Addon Provider: pablouser1
+msgid ""
+msgstr ""
+"Project-Id-Version: FILMIN\n"
+"Report-Msgid-Bugs-To: https://github.com/pablouser1/plugin.video.filmin/issues/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Pablo Ferreiro\n"
+"Language-Team: Spanish (Spain) Pablo Ferreiro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#40000"
+msgid "Account"
+msgstr "Cuenta"
+
+msgctxt "#40001"
+msgid "Login"
+msgstr "Iniciar sesión"
+
+msgctxt "#40002"
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgctxt "#40003"
+msgid "Password"
+msgstr "Contraseña"
+
+msgctxt "#40004"
+msgid "Tokens"
+msgstr "Tokens"
+
+msgctxt "#40005"
+msgid "Access Token"
+msgstr "Access Token"
+
+msgctxt "#40006"
+msgid "Refresh Token"
+msgstr "Refresh Token"

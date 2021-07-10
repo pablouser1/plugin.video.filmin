@@ -1,4 +1,5 @@
 from .common import api
+from xbmc import getInfoLabel
 from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 
@@ -6,6 +7,8 @@ class Player:
     # TODO, allow more protocols
     PROTOCOL = 'mpd'
     DRM = 'com.widevine.alpha'
+    MIME_TYPE = 'application/dash+xml'
+    KODI_VERSION_MAJOR = int(getInfoLabel('System.BuildVersion').split('.')[0])
 
     def __init__(self, el_id: int, handle: int):
         self.el_id = el_id
@@ -43,18 +46,22 @@ class Player:
         STREAM_URL = stream['src']
         LICENSE_URL = stream['license_url']
 
-        from inputstreamhelper import Helper # pylint: disable=import-error
-        is_helper = Helper(self.PROTOCOL, drm=self.DRM)
+        import inputstreamhelper # pylint: disable=import-error
+        is_helper = inputstreamhelper.Helper(self.PROTOCOL, drm=self.DRM)
         if is_helper.check_inputstream():
             play_item = ListItem(path=STREAM_URL)
-            play_item.setMimeType('application/xml+dash')
             play_item.setContentLookup(False)
+            play_item.setMimeType(self.MIME_TYPE)
 
-            play_item.setProperty('inputstreamaddon', is_helper.inputstream_addon)
+            if self.KODI_VERSION_MAJOR >= 19:
+                play_item.setProperty('inputstream', is_helper.inputstream_addon)
+            else:
+                play_item.setProperty('inputstreamaddon', is_helper.inputstream_addon)
+
             play_item.setProperty('inputstream.adaptive.manifest_type', self.PROTOCOL)
             play_item.setProperty('inputstream.adaptive.license_type', self.DRM)
             play_item.setProperty('inputstream.adaptive.license_key', LICENSE_URL + '||R{SSM}|')
-            setResolvedUrl(handle=self._HANDLE, succeeded=True, listitem=play_item)
+            setResolvedUrl(self._HANDLE, True, play_item)
 
     def start(self):
         version = self.version()

@@ -25,6 +25,12 @@ class Api:
 
         return res['data']
 
+    def watching(self, limit: int = 2):
+        res = self.makeRequest(endpoint='/user/watching', method='GET', query={
+            'limit': limit
+        })
+        return res['data']
+
     def getMediaSimple(self, item_id: int):
         """
         Get details of media

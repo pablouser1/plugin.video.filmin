@@ -8,8 +8,11 @@ This project is **under heavy development**
 ## Features added
 * Search
 * DRM play
+* Subtitles
 * Auth using access token
+
 ## Priority
 * Login using username and password
 * More menu options
-* Subtitles
+* Error handling
+* Show details of content

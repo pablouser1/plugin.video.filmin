@@ -1,5 +1,5 @@
 from .common import api
-from xbmc import getInfoLabel
+import xbmc
 from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 
@@ -8,7 +8,6 @@ class Player:
     PROTOCOL = 'mpd'
     DRM = 'com.widevine.alpha'
     MIME_TYPE = 'application/dash+xml'
-    KODI_VERSION_MAJOR = int(getInfoLabel('System.BuildVersion').split('.')[0])
 
     def __init__(self, el_id: int, handle: int):
         self.el_id = el_id
@@ -22,12 +21,12 @@ class Player:
         versions_api = item['versions']['data']
         versions_show = []
         for version_api in versions_api:
-            if version_api['rightType']['slug'] != 'offline':
-                label = '{0} - {1}'.format(version_api['name'], version_api['rightType']['name'])
-                list_item = ListItem(label=label)
-                versions_show.append(list_item)
+            label = '{0} - {1}'.format(version_api['name'], version_api['rightType']['name'])
+            list_item = ListItem(label=label)
+            versions_show.append(list_item)
 
         index = Dialog().select('Choose a version', versions_show, preselect=0)
+        xbmc.log("Version index: {0}".format(str(index)), xbmc.LOGINFO)
         version = versions_api[index]
         return version
 
@@ -42,7 +41,7 @@ class Player:
         stream = streams_api[index]
         return stream
 
-    def play(self, stream: dict):
+    def play(self, stream: dict, subs: list):
         STREAM_URL = stream['src']
         LICENSE_URL = stream['license_url']
 
@@ -52,18 +51,20 @@ class Player:
             play_item = ListItem(path=STREAM_URL)
             play_item.setContentLookup(False)
             play_item.setMimeType(self.MIME_TYPE)
-
-            if self.KODI_VERSION_MAJOR >= 19:
-                play_item.setProperty('inputstream', is_helper.inputstream_addon)
-            else:
-                play_item.setProperty('inputstreamaddon', is_helper.inputstream_addon)
-
+            play_item.setProperty('inputstream', is_helper.inputstream_addon)
             play_item.setProperty('inputstream.adaptive.manifest_type', self.PROTOCOL)
             play_item.setProperty('inputstream.adaptive.license_type', self.DRM)
             play_item.setProperty('inputstream.adaptive.license_key', LICENSE_URL + '||R{SSM}|')
+            play_item.setSubtitles(subs)
             setResolvedUrl(self._HANDLE, True, play_item)
 
     def start(self):
         version = self.version()
+        subtitles = version['subtitles']['data']
+        # Subtitles
+        subtitles_url = []
+        for subtitle in subtitles:
+            subtitles_url.append(subtitle['subtitleFiles']['data'][0]['path'])
+
         stream = self.stream(version['id'])
-        self.play(stream)
+        self.play(stream, subtitles_url)

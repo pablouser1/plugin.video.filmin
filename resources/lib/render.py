@@ -6,12 +6,30 @@ class Render:
         self._URL = url
         self._HANDLE = handle
 
+    def getArt(self, item: list):
+        poster = None
+        card = None
+        thumb = None
+        for art in item:
+            if art['image_type'] == 'poster':
+                poster = art['path']
+            elif art['image_type'] == 'card':
+                card = art['path']
+            elif art['image_type'] == 'poster-mini':
+                thumb = art['path']
+
+        return {
+            "poster": poster,
+            "card": card,
+            "thumb": thumb
+        }
+
     def loopResults(self, results: list, heading: str):
         if len(results):
             videos = []
             folders = []
             for result in results:
-                if result["type"] == "short" or "film":
+                if result["type"] == "short" or "film" or "episode":
                     videos.append(result)
                 else:
                     folders.append(result)
@@ -30,21 +48,27 @@ class Render:
         """
         listing = []
         for item in items:
-            # Create a list item with a text label and a thumbnail image.
             list_item = xbmcgui.ListItem(label=item["title"])
-            # FANART
-            # list_item.setProperty('fanart_image', VIDEOS[category][0]['thumb'])
-            list_item.setInfo('video', {'title': item["title"]})
-
-            # URL
+            info = {
+                "title": item["title"]
+            }
+            # STATIC MENUS ONLY
             if menu:
                 url = '{0}?menu={1}'.format(self._URL, item["id"])
             else:
+                # ART
+                art = self.getArt(item["imageResources"]["data"])
+                list_item.setArt(art)
+
+                # SHOWS, SEASONS ONLY
                 if is_dir:
                     url = '{0}?action=listing&id={1}'.format(self._URL, item["id"])
+                # SHORTS, EPISODES, MOVIES ONLY
                 else:
                     list_item.setProperty('IsPlayable', 'true')
                     url = '{0}?action=play&id={1}'.format(self._URL, item["id"])
+
+            list_item.setInfo('video', info)
             # Add our item to the listing as a 3-element tuple.
             listing.append((url, list_item, is_dir))
 

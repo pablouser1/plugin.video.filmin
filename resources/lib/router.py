@@ -16,8 +16,11 @@ class Router:
         items = [
             {
                 "id": "search",
-                "title": "Search",
-                "img": ""
+                "title": "Search"
+            },
+            {
+                "id": "highlights",
+                "title": "Highlights"
             }
         ]
         listing = self.render.getListing(items, menu=True)
@@ -29,6 +32,17 @@ class Router:
             results = api.search(search_term)
             self.render.loopResults(results, 'Search')
 
+    def highlights(self):
+        highlighteds = api.highlights()
+        items = []
+        for highlighted in highlighteds:
+            items.append(highlighted['item']['data'])
+        self.render.loopResults(items, 'Highlighted')
+
+    def listing(self):
+        # TODO
+        pass
+
     def push(self):
         """
         Redirect to apropiete function to render content
@@ -38,10 +52,14 @@ class Router:
             if "menu" in self.params:
                 if self.params['menu'] == 'search':
                     self.search()
+                elif self.params['menu'] == 'highlights':
+                    self.highlights()
+
             elif "action" in self.params:
                 if self.params["action"] == 'play':
                     player = Player(self.params["id"], self._HANDLE)
                     player.start()
-
+                elif self.params["action"] == 'listing':
+                    self.listing()
         else:
             self.mainMenu()

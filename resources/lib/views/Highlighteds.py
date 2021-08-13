@@ -3,7 +3,6 @@ from ..common import api
 
 class Highlighteds(Base):
     path = 'highlighteds'
-    menu = False
     has_dirs = True
     items = []
 

@@ -39,22 +39,30 @@ class Player:
         stream = streams_api[index]
         return stream
 
-    def play(self, stream: dict, subs: list):
-        STREAM_URL = stream['src']
-        LICENSE_URL = stream['license_url']
-
+    def playDRM(self, src: str, license_url: str, subs: list):
+        """
+        Play v2 content
+        """
         import inputstreamhelper # pylint: disable=import-error
         is_helper = inputstreamhelper.Helper(self.PROTOCOL, drm=self.DRM)
         if is_helper.check_inputstream():
-            play_item = ListItem(path=STREAM_URL)
+            play_item = ListItem(path=src)
             play_item.setContentLookup(False)
             play_item.setMimeType(self.MIME_TYPE)
             play_item.setProperty('inputstream', is_helper.inputstream_addon)
             play_item.setProperty('inputstream.adaptive.manifest_type', self.PROTOCOL)
             play_item.setProperty('inputstream.adaptive.license_type', self.DRM)
-            play_item.setProperty('inputstream.adaptive.license_key', LICENSE_URL + '||R{SSM}|')
+            play_item.setProperty('inputstream.adaptive.license_key', license_url + '||R{SSM}|')
             play_item.setSubtitles(subs)
             setResolvedUrl(_HANDLE, True, play_item)
+
+    def playDRMFree(self, src: str, subs: list):
+        """
+        Play v1 content
+        """
+        play_item = ListItem(path=src)
+        play_item.setSubtitles(subs)
+        setResolvedUrl(_HANDLE, True, listitem=play_item)
 
     def start(self):
         version = self.version()
@@ -65,4 +73,7 @@ class Player:
             subtitles_url.append(subtitle['subtitleFiles']['data'][0]['path'])
 
         stream = self.stream(version['id'])
-        self.play(stream, subtitles_url)
+        if (stream["drm"]):
+            self.playDRM(stream['src'], stream['license_url'], subtitles_url)
+        else:
+            self.playDRMFree(stream['src'], subtitles_url)

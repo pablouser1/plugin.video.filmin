@@ -11,14 +11,6 @@
           </constraints>
           <control type="edit" format="string" />
         </setting>
-        <setting id="password" type="string" label="40003">
-          <level>0</level>
-          <default />
-          <constraints>
-            <allowempty>true</allowempty>
-          </constraints>
-          <control type="edit" format="string" />
-        </setting>
       </group>
       <group id="tokens" label="40004">
         <setting id="access_token" type="string" label="40005">

@@ -1,9 +1,11 @@
 from .Base import Base
 
 class MainMenu(Base):
-    path = ''
+    """
+    Main menu, default menu. Does not have a path string
+    """
+
     menu = True
-    has_dirs = True
     items = [
         {
             "id": "search",

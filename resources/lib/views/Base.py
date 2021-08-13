@@ -10,12 +10,12 @@ class Base:
     """
 
     """
-    Path to Kodi to search
+    Path for Kodi to search
     """
     path = ''
 
     """
-    True if static menu not from Filmin API
+    True if is an static menu with predefined items
     """
     menu = False
 
@@ -25,7 +25,7 @@ class Base:
     has_dirs = False
 
     """
-    True if the directory contains both videos and folders. IF THIS IS TRUE, SET HAS_DIRS AND MENU TO FALSE
+    True if the directory contains both videos and folders. IF THIS IS TRUE, DON'T SET HAS_DIRS AND/OR MENU TO TRUE
     """
     is_mixed = False
 
@@ -61,7 +61,7 @@ class Base:
             "thumb": thumb
         }
 
-    def renderStatic(self):
+    def renderStatic(self)-> list:
         """
         Render static folders
         """
@@ -78,7 +78,7 @@ class Base:
 
         return listing
 
-    def renderDyn(self, items: list, is_dir: bool):
+    def renderDyn(self, items: list, is_dir: bool)-> list:
         """
         Render folders fetched from Filmin API
         """
@@ -105,7 +105,10 @@ class Base:
             listing.append((url, list_item, is_dir))
         return listing
 
-    def renderMix(self):
+    def renderMix(self)-> list:
+        """
+        Render folder with containing both another folders and videos
+        """
         videos = []
         folders = []
         for item in self.items:
@@ -121,11 +124,17 @@ class Base:
         return listing
 
     def createDirectory(self, listing: list):
+        """
+        Append folder to Kodi
+        """
         xbmcplugin.addDirectoryItems(_HANDLE, listing, len(listing))
         xbmcplugin.addSortMethod(_HANDLE, xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE)
         xbmcplugin.endOfDirectory(_HANDLE)
 
     def show(self):
+        """
+        Renders folder depending of config
+        """
         listing = []
         # Render static menu
         if self.menu:

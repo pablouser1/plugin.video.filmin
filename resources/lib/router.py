@@ -1,4 +1,4 @@
-from urllib.parse import urlencode, parse_qsl
+from urllib.parse import parse_qsl
 
 from .common import api
 from .player import Player

@@ -14,5 +14,9 @@ class MainMenu(Base):
         {
             "id": "highlighteds",
             "title": "Highlighteds"
+        },
+        {
+            "id": "collections",
+            "title": "Collections"
         }
     ]

@@ -54,6 +54,10 @@ class Api:
 
         return items
 
+    def collections(self)-> list:
+        res = self.makeRequest(endpoint='/collections')
+        return res['data']
+
     def getMediaSimple(self, item_id: int):
         """
         Get details of media
@@ -75,9 +79,8 @@ class Api:
         # FILMIN V2 (DRM)
         if 'feeds' in res:
             for feed in res['feeds']:
-                versions.append(feed + {
-                    "drm": True
-                })
+                feed["drm"] = True
+                versions.append(feed)
 
         # FILMIN V1 (DRM-FREE)
         elif 'FLVURL' in res:

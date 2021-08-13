@@ -19,23 +19,35 @@ class Api:
         self.s.headers["Authorization"] = f'Bearer {token}'
 
     def search(self, term: str):
-        res = self.makeRequest(endpoint='/searcher', method='GET', query={
+        res = self.makeRequest(endpoint='/searcher', query={
             'q': term
         })
 
         return res['data']
 
-    def highlights(self):
+    def highlighteds(self):
+        items = []
         res = self.makeRequest(endpoint='/highlighteds/home')
-        return res['data']
+
+        for item in res['data']:
+            items.append(item['item']['data'])
+
+        return items
 
     def getMediaSimple(self, item_id: int):
         """
         Get details of media
         """
-        res = self.makeRequest(endpoint='/media/{0}/simple'.format(item_id))
+        res = self.makeRequest(endpoint=f'/media/{item_id}/simple')
+        return res['data']
+
+    def getMediaFull(self, item_id: int):
+        """
+        Get complete details of media
+        """
+        res = self.makeRequest(endpoint=f'/media/{item_id}/full')
         return res['data']
 
     def getStreams(self, item_id: int):
-        res = self.makeRequest(endpoint='/version/{0}'.format(item_id))
+        res = self.makeRequest(endpoint=f'/version/{item_id}')
         return res['feeds']

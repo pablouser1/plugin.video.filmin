@@ -1,65 +1,35 @@
+from urllib.parse import urlencode, parse_qsl
+
 from .common import api
 from .player import Player
-from .render import Render
-from urllib.parse import urlencode, parse_qsl
-import xbmcgui
-import xbmcplugin
-STATIC_URL = "https://static.filmin.es"
+from .views.index import views as available_views
+from .views.MainMenu import MainMenu
 
 class Router:
-    def __init__(self, query: str, url: str, handle: int):
+    def __init__(self, query: str):
         self.params = dict(parse_qsl(query))
-        self._HANDLE = handle
-        self.render = Render(url, handle)
 
-    def mainMenu(self):
-        items = [
-            {
-                "id": "search",
-                "title": "Search"
-            },
-            {
-                "id": "highlights",
-                "title": "Highlights"
-            }
-        ]
-        listing = self.render.getListing(items, menu=True)
-        self.render.createDirectory(listing)
-
-    def search(self):
-        search_term = xbmcgui.Dialog().input('Search', type=xbmcgui.INPUT_ALPHANUM)
-        if search_term:
-            results = api.search(search_term)
-            self.render.loopResults(results, 'Search')
-
-    def highlights(self):
-        highlighteds = api.highlights()
-        items = []
-        for highlighted in highlighteds:
-            items.append(highlighted['item']['data'])
-        self.render.loopResults(items, 'Highlighted')
-
-    def listing(self):
-        # TODO
-        pass
+    def processView(self, view):
+        """
+        Starts rendering process with selected view
+        """
+        selectedView = view()
+        selectedView.setItems()
+        selectedView.show()
 
     def push(self):
         """
-        Redirect to apropiete function to render content
+        Redirect to apropiete class to render content
         """
         if self.params:
-            # Special menu options
-            if "menu" in self.params:
-                if self.params['menu'] == 'search':
-                    self.search()
-                elif self.params['menu'] == 'highlights':
-                    self.highlights()
-
-            elif "action" in self.params:
-                if self.params["action"] == 'play':
-                    player = Player(self.params["id"], self._HANDLE)
+            if 'menu' in self.params:
+                for view in available_views:
+                    if view.path in self.params['menu']:
+                        self.processView(view)
+                        break
+            elif 'action' in self.params:
+                if 'play' in self.params['action']:
+                    player = Player(self.params['id'])
                     player.start()
-                elif self.params["action"] == 'listing':
-                    self.listing()
         else:
-            self.mainMenu()
+            self.processView(MainMenu)

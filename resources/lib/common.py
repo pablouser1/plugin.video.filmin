@@ -1,7 +1,9 @@
+import sys
 from .config import Config
 from .api import Api
-from .helpers.env import Env
+
+_URL = sys.argv[0]
+_HANDLE = int(sys.argv[1])
 
 config = Config()
 api = Api()
-env = Env()

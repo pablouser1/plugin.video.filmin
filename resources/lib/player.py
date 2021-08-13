@@ -1,17 +1,15 @@
-from .common import api
 import xbmc
 from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
+from .common import api, _HANDLE
 
 class Player:
-    # TODO, allow more protocols
     PROTOCOL = 'mpd'
     DRM = 'com.widevine.alpha'
     MIME_TYPE = 'application/dash+xml'
 
-    def __init__(self, el_id: int, handle: int):
+    def __init__(self, el_id: int):
         self.el_id = el_id
-        self._HANDLE = handle
 
     def version(self)-> dict:
         """
@@ -56,7 +54,7 @@ class Player:
             play_item.setProperty('inputstream.adaptive.license_type', self.DRM)
             play_item.setProperty('inputstream.adaptive.license_key', LICENSE_URL + '||R{SSM}|')
             play_item.setSubtitles(subs)
-            setResolvedUrl(self._HANDLE, True, play_item)
+            setResolvedUrl(_HANDLE, True, play_item)
 
     def start(self):
         version = self.version()

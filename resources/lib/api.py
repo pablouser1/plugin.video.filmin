@@ -58,6 +58,14 @@ class Api:
         res = self.makeRequest(endpoint='/collections')
         return res['data']
 
+    def collection(self, collection_id: int)-> list:
+        res = self.makeRequest(endpoint=f'/collections/{collection_id}/medias')
+        return res['data']
+
+    def festivals(self)-> list:
+        res = self.makeRequest(endpoint='/festivals')
+        return res["data"]["items"]
+
     def getMediaSimple(self, item_id: int):
         """
         Get details of media
@@ -67,7 +75,7 @@ class Api:
 
     def getMediaFull(self, item_id: int):
         """
-        Get complete details of media
+        Get complete details of media, currently not used
         """
         res = self.makeRequest(endpoint=f'/media/{item_id}/full')
         return res['data']
@@ -77,10 +85,15 @@ class Api:
         res = self.makeRequest(endpoint=f'/version/{item_id}')
 
         # FILMIN V2 (DRM)
+        # Multiple feeds
         if 'feeds' in res:
             for feed in res['feeds']:
                 feed["drm"] = True
                 versions.append(feed)
+        # Only one feed
+        elif type(res) is dict and 'license_url' in res:
+            res["drm"] = True
+            versions.append(res)
 
         # FILMIN V1 (DRM-FREE)
         elif 'FLVURL' in res:

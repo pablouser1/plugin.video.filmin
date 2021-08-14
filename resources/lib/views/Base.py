@@ -1,8 +1,5 @@
-import xbmcgui
-import xbmcplugin
+from ..helpers.Render import Render
 import xbmc
-
-from ..common import _HANDLE, _URL
 
 class Base:
     """
@@ -15,9 +12,19 @@ class Base:
     path = ''
 
     """
+    Path that kodi will assign to all folder items, defaults to episodes
+    """
+    folders_goTo = 'episodes'
+
+    """
+    Set to True if the endpoint has a pagination system TODO, make it work
+    """
+    pages = False
+
+    """
     True if is an static menu with predefined items
     """
-    menu = False
+    static = False
 
     """
     True if the directory is recursive, False if the directory only has videos
@@ -25,9 +32,9 @@ class Base:
     has_dirs = False
 
     """
-    True if the directory contains both videos and folders. IF THIS IS TRUE, DON'T SET HAS_DIRS AND/OR MENU TO TRUE
+    True if the directory contains both videos and folders. IF THIS IS TRUE, DON'T SET HAS_DIRS AND/OR STATIC TO TRUE
     """
-    is_mixed = False
+    mixed = False
 
     """
     All items
@@ -40,115 +47,25 @@ class Base:
         """
         pass
 
-    def getArt(self, item: list):
-        """
-        Sorts art for Filmin Menus
-        """
-        poster = None
-        card = None
-        thumb = None
-        for art in item:
-            if art['image_type'] == 'poster':
-                poster = art['path']
-            elif art['image_type'] == 'card':
-                card = art['path']
-            elif art['image_type'] == 'poster-mini':
-                thumb = art['path']
-
-        return {
-            "poster": poster,
-            "card": card,
-            "thumb": thumb
-        }
-
-    def renderStatic(self)-> list:
-        """
-        Render static folders
-        """
-        listing = []
-        for item in self.items:
-            list_item = xbmcgui.ListItem(label=item["title"])
-            info = {
-                "title": item["title"]
-            }
-            url = '{0}?menu={1}'.format(_URL, item["id"])
-            list_item.setInfo('video', info)
-            # Add our item to the listing as a 3-element tuple.
-            listing.append((url, list_item, True))
-
-        return listing
-
-    def renderDyn(self, items: list, is_dir: bool)-> list:
-        """
-        Render folders fetched from Filmin API
-        """
-        listing = []
-        for item in items:
-            list_item = xbmcgui.ListItem(label=item["title"])
-            info = {
-                "title": item["title"]
-            }
-            # ART
-            art = self.getArt(item["imageResources"]["data"])
-            list_item.setArt(art)
-
-            # SHOWS, SEASONS ONLY
-            if is_dir:
-                url = '{0}?menu=listing&id={1}'.format(_URL, item["id"])
-            # SHORTS, EPISODES, MOVIES ONLY
-            else:
-                list_item.setProperty('IsPlayable', 'true')
-                url = '{0}?action=play&id={1}'.format(_URL, item["id"])
-
-            list_item.setInfo('video', info)
-            # Add our item to the listing as a 3-element tuple.
-            listing.append((url, list_item, is_dir))
-        return listing
-
-    def renderMix(self)-> list:
-        """
-        Render folder with containing both another folders and videos
-        """
-        videos = []
-        folders = []
-        for item in self.items:
-            if item["type"] == "short" or "film" or "episode":
-                videos.append(item)
-            else:
-                folders.append(item)
-
-        videos_listing = self.renderDyn(videos, False)
-        folders_listing = self.renderDyn(folders, True)
-        listing = videos_listing + folders_listing
-
-        return listing
-
-    def createDirectory(self, listing: list):
-        """
-        Append folder to Kodi
-        """
-        xbmcplugin.addDirectoryItems(_HANDLE, listing, len(listing))
-        xbmcplugin.addSortMethod(_HANDLE, xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE)
-        xbmcplugin.endOfDirectory(_HANDLE)
-
     def show(self):
         """
         Renders folder depending of config
         """
         listing = []
         # Render static menu
-        if self.menu:
-            listing = self.renderStatic()
+        if self.static:
+            listing = Render.static(self.items)
         else:
-            # Render folder containing videos and other folders
-            if self.is_mixed:
-                listing = self.renderMix()
+            # Render folder containing both videos and other folders
+            if self.mixed:
+                xbmc.log(self.folders_goTo, xbmc.LOGINFO)
+                listing = Render.mix(self.items, self.folders_goTo)
             else:
                 # Render folder with other folders
                 if self.has_dirs:
-                    listing = self.renderDyn(self.items, True)
+                    listing = Render.folders(self.items, self.folders_goTo)
                 # Render folder with videos
                 else:
-                    listing = self.renderDyn(self.items, False)
+                    listing = Render.videos(self.items)
 
-        self.createDirectory(listing)
+        Render.createDirectory(listing)

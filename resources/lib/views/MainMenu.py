@@ -4,8 +4,7 @@ class MainMenu(Base):
     """
     Main menu, default menu. Does not have a path string
     """
-
-    menu = True
+    static = True
     items = [
         {
             "id": "search",

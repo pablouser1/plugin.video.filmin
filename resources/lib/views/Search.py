@@ -7,7 +7,7 @@ class Search(Base):
     Search function
     """
     path = 'search'
-    is_mixed = True
+    mixed = True
     items = []
 
     def setItems(self):

@@ -19,11 +19,12 @@ class Player:
         versions_api = item['versions']['data']
         versions_show = []
         for version_api in versions_api:
-            label = '{0} - {1}'.format(version_api['name'], version_api['rightType']['name'])
-            list_item = ListItem(label=label)
-            versions_show.append(list_item)
+            if not version_api['offline']:
+                label = '{0} - {1}'.format(version_api['name'], version_api['rightType']['name'])
+                list_item = ListItem(label=label)
+                versions_show.append(list_item)
 
-        index = Dialog().select('Choose a version', versions_show, preselect=0)
+        index = Dialog().select('Choose a version', versions_show)
         xbmc.log("Version index: {0}".format(str(index)), xbmc.LOGINFO)
         version = versions_api[index]
         return version
@@ -35,7 +36,7 @@ class Player:
             list_item = ListItem(label=stream_api['type'])
             streams_show.append(list_item)
 
-        index = Dialog().select('Choose a feed', streams_show, preselect=0)
+        index = Dialog().select('Choose a feed', streams_show)
         stream = streams_api[index]
         return stream
 

@@ -3,7 +3,7 @@ from ..common import api
 
 class Highlighteds(Base):
     path = 'highlighteds'
-    has_dirs = True
+    mixed = True
     items = []
 
     def setItems(self):

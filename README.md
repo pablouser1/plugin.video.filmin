@@ -3,7 +3,7 @@ Play your favorites Filmin movies and shows using Kodi ≥ 19 (Matrix)
 
 Currently able to play DRM content using Inputstream Helper and Non-DRM content
 
-This project is **under heavy development**
+This project is still in beta
 
 ## Roadmap
 ### Features added
@@ -11,8 +11,11 @@ This project is **under heavy development**
 * DRM and non-DRM play with the ability to choose audio and subtitles
 * Search
 * Highlights
+* Collections
 
 ### Priority
-* Shows and seasons support
-* More menu options
-* Show details of content
+* Sync progress to Filmin
+* Up Next Integration
+* Playlist
+* Festivals
+* Sort

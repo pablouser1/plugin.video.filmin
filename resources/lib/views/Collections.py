@@ -3,6 +3,8 @@ from ..common import api
 
 class Collections(Base):
     path = 'collections'
+    folders_goTo = 'collection'
+
     has_dirs = True
     items = []
 

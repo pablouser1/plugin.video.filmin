@@ -1,6 +1,6 @@
 from .common import api, params
 from .player import Player
-from .views.index import views as available_views
+from .views import views as available_views
 from .views.MainMenu import MainMenu
 
 class Router:

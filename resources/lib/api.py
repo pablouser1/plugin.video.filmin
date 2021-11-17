@@ -17,7 +17,7 @@ class Api:
     def __init__(self):
         self.s.headers["X-CLIENT-ID"] = self.CLIENT_ID
 
-    def makeRequest(self, endpoint: str, method: str = Methods.GET, body = None, query = None):
+    def makeRequest(self, endpoint: str, method: str = Methods.GET, body: dict = None, query: dict = None):
         res = self.s.request(method, BASE_URL + endpoint, json=body, params=query)
         res_json = res.json()
         if res.ok:
@@ -43,7 +43,8 @@ class Api:
             'q': term
         })
 
-        return res['data']
+        # Return only allowed items (tvshows, movies...)
+        return filter(lambda item: 'type' in item, res['data'])
 
     def highlighteds(self)-> list:
         items = []

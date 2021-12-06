@@ -1,9 +1,8 @@
 # Filmin Kodi
+
+**English** / [Español](README.es-es.md)
+
 Play your favorites Filmin movies and shows using Kodi ≥ 19 (Matrix)
-
-Currently able to play DRM content using Inputstream Helper and Non-DRM content
-
-This project is still in beta
 
 ## Roadmap
 ### Features added
@@ -12,6 +11,7 @@ This project is still in beta
 * Search
 * Highlights
 * Collections
+* Watching
 
 ### Priority
 * Sync progress to Filmin

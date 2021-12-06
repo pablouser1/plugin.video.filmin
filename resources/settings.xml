@@ -1,19 +1,43 @@
 <?xml version="1.0"?>
 <settings version="1">
   <section id="plugin.video.filmin">
+    <!-- General -->
+    <category id="general" label="40007">
+      <group id="features" label="40008">
+        <setting id="sync" type="boolean" label="40009">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="upnext" type="boolean" label="40010">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+    <!-- Login -->
     <category id="login" label="40000">
       <group id="account" label="40001">
         <setting id="username" type="string" label="40002">
           <level>0</level>
           <default />
+          <enable>false</enable>
           <constraints>
             <allowempty>true</allowempty>
           </constraints>
           <control type="edit" format="string" />
         </setting>
+        <setting id="logout" type="action" label="40006">
+          <level>0</level>
+          <data>RunPlugin(plugin://$ID?action=logout)</data>
+          <control type="button" format="action">
+            <close>true</close>
+          </control>
+        </setting>
       </group>
-      <group id="tokens" label="40004">
-        <setting id="access_token" type="string" label="40005">
+      <group id="tokens" label="40003">
+        <setting id="access_token" type="string" label="40004">
           <level>2</level>
           <default />
           <constraints>
@@ -21,7 +45,7 @@
           </constraints>
           <control type="edit" format="string" />
         </setting>
-        <setting id="refresh_token" type="string" label="40006">
+        <setting id="refresh_token" type="string" label="40005">
           <level>2</level>
           <default />
           <constraints>

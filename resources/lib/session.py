@@ -9,3 +9,9 @@ def askLogin():
         config.setAuth(res['access_token'], res['refresh_token'], username)
         api.setToken(res['access_token'])
         Dialog().ok('Login', 'Logged in successfully')
+
+def startLogout():
+    api.logout()
+    config.setAuth('', '', '')
+    api.setToken('')
+    Dialog().ok('Done', 'Logged out')

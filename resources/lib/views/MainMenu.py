@@ -17,5 +17,9 @@ class MainMenu(Base):
         {
             "id": "collections",
             "title": "Collections"
+        },
+        {
+            "id": "watching",
+            "title": "Watching"
         }
     ]

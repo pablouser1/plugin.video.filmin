@@ -1,5 +1,6 @@
 from .common import api, params
-from .player import Player
+from .session import startLogout
+from .player.handler import Play
 from .views import views as available_views
 from .views.MainMenu import MainMenu
 
@@ -24,7 +25,9 @@ class Router:
                         break
             elif 'action' in params:
                 if 'play' in params['action']:
-                    player = Player(params['id'])
-                    player.start()
+                    play = Play(params['id'])
+                    play.start()
+                elif 'logout' in params['action']:
+                    startLogout()
         else:
             self.processView(MainMenu)

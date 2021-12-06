@@ -3,8 +3,6 @@ from xbmcaddon import Addon
 class Config:
     addon = Addon('plugin.video.filmin')
 
-    # TODO, HANDLE REFRESH TOKEN AND EXPIRE DATE
-
     # Check if user has already has an access token
     def hasLoginData(self)-> bool:
         if self.addon.getSettingString('access_token'):

@@ -1,6 +1,6 @@
 import sys
 from .router import Router
-from .login import askLogin
+from .session import askLogin
 from .common import config, api
 
 def run():

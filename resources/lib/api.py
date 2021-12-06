@@ -2,12 +2,8 @@ import requests
 from .helpers.Methods import Methods
 from .exceptions.ApiException import ApiException
 
-BASE_URL = "https://apiv3.filmin.es"
-STREAMING_URL = "https://streaming.filmin.es"
-
-s = requests.Session()
-
 class Api:
+    BASE_URL = "https://apiv3.filmin.es"
     s = requests.Session()
 
     # Both extracted from the Android app
@@ -18,7 +14,7 @@ class Api:
         self.s.headers["X-CLIENT-ID"] = self.CLIENT_ID
 
     def makeRequest(self, endpoint: str, method: str = Methods.GET, body: dict = None, query: dict = None):
-        res = self.s.request(method, BASE_URL + endpoint, json=body, params=query)
+        res = self.s.request(method, self.BASE_URL + endpoint, json=body, params=query)
         res_json = res.json()
         if res.ok:
             return res_json
@@ -34,6 +30,9 @@ class Api:
             "username": username
         })
         return res
+
+    def logout(self):
+        self.makeRequest('/oauth/logout', Methods.POST)
 
     def setToken(self, token: str):
         self.s.headers["Authorization"] = f'Bearer {token}'
@@ -66,6 +65,16 @@ class Api:
     def festivals(self)-> list:
         res = self.makeRequest(endpoint='/festivals')
         return res["data"]["items"]
+
+    def watching(self)-> list:
+        items = []
+        res = self.makeRequest(endpoint='/user/watching', query={
+            'limit': 5
+        })
+        for item in res['data']:
+            items.append(item['entity']['data'])
+
+        return items
 
     def getMediaSimple(self, item_id: int):
         """

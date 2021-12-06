@@ -21,25 +21,41 @@ msgid "Account"
 msgstr "Cuenta"
 
 msgctxt "#40001"
-msgid "Login"
-msgstr "Iniciar sesión"
+msgid "Login info"
+msgstr "Datos de la sesión"
 
 msgctxt "#40002"
 msgid "Username"
 msgstr "Nombre de usuario"
 
 msgctxt "#40003"
-msgid "Password"
-msgstr "Contraseña"
-
-msgctxt "#40004"
 msgid "Tokens"
 msgstr "Tokens"
 
-msgctxt "#40005"
+msgctxt "#40004"
 msgid "Access Token"
 msgstr "Access Token"
 
-msgctxt "#40006"
+msgctxt "#40005"
 msgid "Refresh Token"
 msgstr "Refresh Token"
+
+msgctxt "#40006"
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+msgctxt "#40007"
+msgid "General"
+msgstr "General"
+
+msgctxt "#40008"
+msgid "Features"
+msgstr "Funciones"
+
+msgctxt "#40009"
+msgid "Sync progress with Filmin"
+msgstr "Sincronizar progreso con Filmin"
+
+msgctxt "#40010"
+msgid "Enable Up Next integration"
+msgstr "Habilitar integración con Up Next"

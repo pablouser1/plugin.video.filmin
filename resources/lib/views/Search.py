@@ -8,7 +8,6 @@ class Search(Base):
     """
     path = 'search'
     mixed = True
-    items = []
 
     def setItems(self):
         search_term = xbmcgui.Dialog().input('Search', type=xbmcgui.INPUT_ALPHANUM)

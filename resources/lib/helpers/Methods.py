@@ -1,5 +1,4 @@
-from enum import Enum
-class Methods(Enum):
+class Methods:
     GET = 'GET'
     POST = 'POST'
     PUT = 'PUT'

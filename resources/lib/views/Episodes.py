@@ -3,7 +3,6 @@ from ..common import api, params
 
 class Episodes(Base):
     path = 'episodes'
-    items = []
 
     def setItems(self):
         items = []

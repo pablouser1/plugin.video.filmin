@@ -1,4 +1,3 @@
-import sys
 from .router import Router
 from .session import askLogin
 from .common import config, api

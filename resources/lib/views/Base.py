@@ -1,5 +1,4 @@
 from ..helpers.Render import Render
-import xbmc
 
 class Base:
     """
@@ -58,7 +57,6 @@ class Base:
         else:
             # Render folder containing both videos and other folders
             if self.mixed:
-                xbmc.log(self.folders_goTo, xbmc.LOGINFO)
                 listing = Render.mix(self.items, self.folders_goTo)
             else:
                 # Render folder with other folders

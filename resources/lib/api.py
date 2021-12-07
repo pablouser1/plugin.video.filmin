@@ -1,4 +1,5 @@
 import requests
+import xbmc
 from .helpers.Methods import Methods
 from .exceptions.ApiException import ApiException
 
@@ -12,6 +13,9 @@ class Api:
 
     def __init__(self):
         self.s.headers["X-CLIENT-ID"] = self.CLIENT_ID
+        self.s.headers["clientlanguage"] = xbmc.getLanguage(xbmc.ISO_639_1, True)
+        self.s.headers["clientversion"] = '4.2.316' # Latest Filmin version Android
+        self.s.headers["devicemodel"] = 'Kodi'
 
     def makeRequest(self, endpoint: str, method: str = Methods.GET, body: dict = None, query: dict = None):
         res = self.s.request(method, self.BASE_URL + endpoint, json=body, params=query)

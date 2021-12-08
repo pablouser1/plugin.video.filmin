@@ -9,7 +9,12 @@
           <default>false</default>
           <control type="toggle"/>
         </setting>
-        <setting id="upnext" type="boolean" label="40010">
+        <setting id="tickets" type="boolean" label="40010">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="upnext" type="boolean" label="40011">
           <level>0</level>
           <default>false</default>
           <control type="toggle"/>

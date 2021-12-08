@@ -15,6 +15,10 @@ class MainMenu(Base):
             "title": "Catalog"
         },
         {
+            "id": "purchased",
+            "title": "Purchased"
+        },
+        {
             "id": "highlighteds",
             "title": "Highlighteds"
         },

@@ -57,5 +57,9 @@ msgid "Sync progress with Filmin"
 msgstr ""
 
 msgctxt "#40010"
+msgid "Allow renting media with tickets"
+msgstr ""
+
+msgctxt "#40011"
 msgid "Enable Up Next integration"
 msgstr ""

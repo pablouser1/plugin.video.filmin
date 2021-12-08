@@ -1,5 +1,6 @@
 from .Search import Search
 from .Catalog import Catalog
+from .Purchased import Purchased
 from .Highlighteds import Highlighteds
 from .Collections import Collections
 from .Collection import Collection
@@ -12,5 +13,5 @@ from .Episodes import Episodes
 All views available
 """
 views = [
-    Search, Catalog, Highlighteds, Collections, Collection, Watching, Playlists, Playlist, Seasons, Episodes
+    Search, Catalog, Purchased, Highlighteds, Collections, Collection, Watching, Playlists, Playlist, Seasons, Episodes
 ]

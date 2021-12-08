@@ -41,6 +41,10 @@ class Api:
     def setToken(self, token: str):
         self.s.headers["Authorization"] = f'Bearer {token}'
 
+    def user(self):
+        res = self.makeRequest(endpoint='/user')
+        return res['data']
+
     def genres(self):
         res = self.makeRequest(endpoint='/genres')
         return res['data']
@@ -60,6 +64,7 @@ class Api:
 
         res = self.makeRequest(endpoint='/media/catalog', query=query)
         return res['data']
+
     def search(self, term: str)-> list:
         res = self.makeRequest(endpoint='/searcher', query={
             'q': term
@@ -67,6 +72,10 @@ class Api:
 
         # Return only allowed items (tvshows, movies...)
         return filter(lambda item: 'type' in item, res['data'])
+
+    def purchased(self)-> list:
+        res = self.makeRequest(endpoint='/user/purchased/medias')
+        return res['data']
 
     def highlighteds(self)-> list:
         items = []
@@ -125,6 +134,11 @@ class Api:
                 items = season["episodes"]["data"]
 
         return items
+
+    def useTicket(self, item_id: int):
+        self.makeRequest(endpoint='/user/tickets/activate', method=Methods.POST, body={
+            'id': item_id
+        })
 
     def getStreams(self, item_id: int):
         versions = []

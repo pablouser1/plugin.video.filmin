@@ -5,12 +5,6 @@ class Episodes(Base):
     path = 'episodes'
 
     def setItems(self):
-        items = []
-        item_id = params["id"]
-        res = api.getMediaSimple(item_id)
-        for season in res["seasons"]["data"]:
-            for episode in season["episodes"]["data"]:
-                episode["display_title"] = f'{episode["title"]} - {season["title"]}'
-                items.append(episode)
-
-        self.items = items
+        item_id = params["item_id"]
+        season_id = params["id"]
+        self.items = api.episodes(item_id, season_id)

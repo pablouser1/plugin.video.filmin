@@ -1,10 +1,10 @@
-import xbmc
 from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 from ..common import api, _HANDLE
 from ..helpers.listitem import setInfoVideo
 from .player import Player
 from ..exceptions.DRMException import DRMException
+from ..exceptions.StreamException import StreamException
 
 class Play():
     PROTOCOL = 'mpd'
@@ -28,13 +28,14 @@ class Play():
                 versions_show.append(list_item)
 
         index = Dialog().select('Choose a version', versions_show)
-        xbmc.log("Version index: {0}".format(str(index)), xbmc.LOGINFO)
         version = versions_filtered[index]
         return version
 
     def streamPicker(self, version_id: int)-> dict:
         # Choose first stream available
         streams = api.getStreams(version_id)
+        if len(streams == 0):
+            raise StreamException()
         return streams[0]
 
     def start(self):

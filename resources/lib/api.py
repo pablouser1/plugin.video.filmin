@@ -87,18 +87,24 @@ class Api:
         res = self.makeRequest(endpoint=f'/media/{item_id}/simple')
         return res['data']
 
-    def getMediaFull(self, item_id: int):
-        """
-        Get complete details of media, currently not used
-        """
-        res = self.makeRequest(endpoint=f'/media/{item_id}/full')
-        return res['data']
+    def seasons(self, item_id: int):
+        res = self.getMediaSimple(item_id)
+        return res['seasons']['data']
+
+    def episodes(self, item_id: int, season_id: int):
+        items = []
+        seasons = self.seasons(item_id)
+        for season in seasons:
+            if int(season_id) == season['id']:
+                items = season["episodes"]["data"]
+
+        return items
 
     def getStreams(self, item_id: int):
         versions = []
         res = self.makeRequest(endpoint=f'/version/{item_id}')
 
-        # FILMIN V2 (DRM)
+        # -- FILMIN V2 (DRM) -- #
         # Multiple feeds
         if 'feeds' in res:
             for feed in res['feeds']:
@@ -109,7 +115,7 @@ class Api:
             res["drm"] = True
             versions.append(res)
 
-        # FILMIN V1 (DRM-FREE)
+        # -- FILMIN V1 (DRM-FREE) -- #
         elif 'FLVURL' in res:
             versions.append({
                 "type": "FLVURL",

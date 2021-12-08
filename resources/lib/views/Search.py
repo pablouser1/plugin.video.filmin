@@ -1,6 +1,7 @@
 import xbmcgui
 from .Base import Base
 from ..common import api
+from ..exceptions.SearchException import SearchException
 
 class Search(Base):
     """
@@ -14,4 +15,4 @@ class Search(Base):
         if search_term:
             self.items = api.search(search_term)
         else:
-            xbmcgui.Dialog().ok('Search', 'No results')
+            raise SearchException()

@@ -11,9 +11,9 @@ class Base:
     path = ''
 
     """
-    Path that kodi will assign to all folder items, defaults to episodes
+    Path that kodi will assign to all folder items
     """
-    folders_goTo = 'episodes'
+    folders_goTo = ''
 
     """
     Set to True if the endpoint has a pagination system TODO, make it work

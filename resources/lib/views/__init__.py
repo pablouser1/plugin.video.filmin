@@ -4,10 +4,11 @@ from .Collections import Collections
 from .Collection import Collection
 from .Episodes import Episodes
 from .Watching import Watching
+from .Seasons import Seasons
 
 """
 All views available
 """
 views = [
-    Search, Highlighteds, Collections, Collection, Episodes, Watching
+    Search, Highlighteds, Collections, Collection, Watching, Seasons, Episodes
 ]

@@ -5,7 +5,7 @@
 Reproduce tu contenido de Filmin favorito usando Kodi ≥ 19 (Matrix)
 
 ## Cómo instalar
-Descarga el zip [aquí](/releases/latest) e instálalo en Kodi.
+Descarga el zip encontrado en la pestaña de "Releases" e instálalo en Kodi.
 
 ## Roadmap
 ### Funciones agregadas

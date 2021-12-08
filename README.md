@@ -5,7 +5,7 @@
 Play your favorites Filmin movies and shows using Kodi ≥ 19 (Matrix)
 
 ## How to install
-Download the zip [here](/releases/latest) and install it using Kodi.
+Download the zip from the releases tab and install it using Kodi.
 
 ## Roadmap
 ### Features added

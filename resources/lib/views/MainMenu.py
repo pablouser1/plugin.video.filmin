@@ -11,6 +11,10 @@ class MainMenu(Base):
             "title": "Search"
         },
         {
+            "id": "catalog",
+            "title": "Catalog"
+        },
+        {
             "id": "highlighteds",
             "title": "Highlighteds"
         },
@@ -21,5 +25,9 @@ class MainMenu(Base):
         {
             "id": "watching",
             "title": "Watching"
+        },
+        {
+            "id": "playlists",
+            "title": "My playlists"
         }
     ]

@@ -4,6 +4,9 @@
 
 Play your favorites Filmin movies and shows using Kodi ≥ 19 (Matrix)
 
+## How to install
+Download the zip [here](/releases/latest) and install it using Kodi.
+
 ## Roadmap
 ### Features added
 * Auth
@@ -12,10 +15,10 @@ Play your favorites Filmin movies and shows using Kodi ≥ 19 (Matrix)
 * Highlights
 * Collections
 * Watching
+* Playlists
 
 ### Priority
 * Sync progress to Filmin
 * Up Next Integration
-* Playlist
 * Festivals
 * Sort

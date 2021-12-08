@@ -41,6 +41,25 @@ class Api:
     def setToken(self, token: str):
         self.s.headers["Authorization"] = f'Bearer {token}'
 
+    def genres(self):
+        res = self.makeRequest(endpoint='/genres')
+        return res['data']
+
+    def catalog(self, item_type: str = '', genre: int = -1, subgenre: int = -1):
+        query = {}
+        if item_type:
+            query['type'] = item_type
+
+        if genre != -1 and subgenre != -1:
+            query['filter_entity'] = 'tag'
+            query['filter_id'] = subgenre
+
+        if genre != -1 and subgenre == -1:
+            query['filter_entity'] = 'genre'
+            query['filter_id'] = genre
+
+        res = self.makeRequest(endpoint='/media/catalog', query=query)
+        return res['data']
     def search(self, term: str)-> list:
         res = self.makeRequest(endpoint='/searcher', query={
             'q': term
@@ -66,10 +85,6 @@ class Api:
         res = self.makeRequest(endpoint=f'/collections/{collection_id}/medias')
         return res['data']
 
-    def festivals(self)-> list:
-        res = self.makeRequest(endpoint='/festivals')
-        return res["data"]["items"]
-
     def watching(self)-> list:
         items = []
         res = self.makeRequest(endpoint='/user/watching', query={
@@ -79,6 +94,17 @@ class Api:
             items.append(item['entity']['data'])
 
         return items
+
+    def playlists(self)-> list:
+        """
+        Get user's playlists
+        """
+        res = self.makeRequest('/user/playlists')
+        return res['data']
+
+    def playlist(self, playlist_id: int):
+        res = self.makeRequest(f'/user/playlists/{playlist_id}/medias')
+        return res['data']
 
     def getMediaSimple(self, item_id: int):
         """

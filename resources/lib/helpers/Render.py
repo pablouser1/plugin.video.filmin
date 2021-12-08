@@ -2,17 +2,10 @@ import xbmcgui
 import xbmcplugin
 
 from ..common import _HANDLE, _URL, params
+from .Types import videos_type, folders_type
 from .listitem import setInfoVideo, setInfoFolder
 
 class Render:
-    videos_type = [
-        "short", "film", "episode"
-    ]
-
-    folders_type = [
-        "serie", "season"
-    ]
-
     @staticmethod
     def static(items: list)-> list:
         """
@@ -51,7 +44,7 @@ class Render:
         listing = []
         for item in items:
             if not menu:
-                if item['type'] == Render.folders_type[0]:
+                if item['type'] == folders_type[0]:
                     menu = 'seasons'
             url = '{0}?menu={1}&id={2}'.format(_URL, menu, item["id"])
             if menu == 'episodes':
@@ -69,7 +62,7 @@ class Render:
         videos = []
         folders = []
         for item in items:
-            if item["type"] in Render.videos_type:
+            if item["type"] in videos_type:
                 videos.append(item)
             else:
                 folders.append(item)

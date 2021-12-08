@@ -4,6 +4,9 @@
 
 Reproduce tu contenido de Filmin favorito usando Kodi ≥ 19 (Matrix)
 
+## Cómo instalar
+Descarga el zip [aquí](/releases/latest) e instálalo en Kodi.
+
 ## Roadmap
 ### Funciones agregadas
 * Autorización
@@ -12,10 +15,10 @@ Reproduce tu contenido de Filmin favorito usando Kodi ≥ 19 (Matrix)
 * Highlights
 * Colecciones
 * Watching
+* Listas de reproducción
 
 ### Prioridades
 * Sincronizar progreso de visionado con Filmin
 * Integración con Up Next
-* Listas de reproducción
 * Festivales
 * Ordenar

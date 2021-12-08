@@ -34,7 +34,7 @@ class Play():
     def streamPicker(self, version_id: int)-> dict:
         # Choose first stream available
         streams = api.getStreams(version_id)
-        if len(streams == 0):
+        if len(streams) == 0:
             raise StreamException()
         return streams[0]
 

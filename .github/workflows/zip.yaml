@@ -8,10 +8,10 @@ jobs:
         uses: actions/checkout@master
       - name: Get XML
         id: getxml
-        uses: mavrosxristoforos/get-xml-info@1.0
+        uses: howbout-ltd/get-xml-info@master
         with:
           xml-file: "addon.xml"
-          xpath: "//addon"
+          xpath: "//addon/@version"
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:

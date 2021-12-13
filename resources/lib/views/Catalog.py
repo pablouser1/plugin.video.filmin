@@ -29,6 +29,8 @@ class Catalog(Base):
 
         index = xbmcgui.Dialog().select('Choose a genre', genres_listitem)
         genre_picked = genres[index]
+
+        # Allow picking subgenre only if there is a genre chosen
         if genre_picked['id'] != -1:
             subgenres = [{"id": -1, "name": "All"}] + genre_picked['subgenres']['data']
             subgenres_listitem = []

@@ -15,7 +15,7 @@ class Config:
             'access': access
         }
 
-    def canBuy()-> bool:
+    def canBuy(self)-> bool:
         return self.addon.getSettingBool('tickets')
 
     def setAuth(self, access_token: str, refresh_token: str, username: str):

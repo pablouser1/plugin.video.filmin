@@ -2,7 +2,6 @@ from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 from ..common import api, config, _HANDLE
 from ..helpers.listitem import setInfoVideo
-from .player import Player
 from ..user import User
 from ..exceptions.DRMException import DRMException
 from ..exceptions.StreamException import StreamException
@@ -33,9 +32,9 @@ class Play():
         versions_filtered = list(filter(lambda version: not version['offline'], versions_api))
         versions_show = []
         for version_temp in versions_filtered:
-                label = '{0} - {1}'.format(version_temp['name'], version_temp['rightType']['name'])
-                list_item = ListItem(label=label)
-                versions_show.append(list_item)
+            label = '{0} - {1}'.format(version_temp['name'], version_temp['rightType']['name'])
+            list_item = ListItem(label=label)
+            versions_show.append(list_item)
 
         index = Dialog().select('Choose a version', versions_show)
         version = versions_filtered[index]
@@ -76,6 +75,5 @@ class Play():
                     raise DRMException()
             # Start playing
             setResolvedUrl(_HANDLE, True, play_item)
-            Player().play(stream['src'], play_item)
         else:
             Dialog().ok('Eror', 'This item is not available')

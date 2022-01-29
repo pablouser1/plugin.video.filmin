@@ -30,7 +30,7 @@ class Render:
         """
         listing = []
         for item in items:
-            url = '{0}?action=play&id={1}'.format(_URL, item["id"])
+            url = '{0}?menu=player&id={1}'.format(_URL, item["id"])
             list_item = setInfoVideo(url, item)
             list_item.setProperty('IsPlayable', 'true')
             listing.append((url, list_item, False))

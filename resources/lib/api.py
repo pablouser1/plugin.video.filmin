@@ -160,6 +160,7 @@ class Api:
             versions.append({
                 "type": "FLVURL",
                 "src": res["FLVURL"],
+                "media_viewing_id": res["media_viewing_id"],
                 "drm": False
             })
 

@@ -63,3 +63,7 @@ msgstr "Permitir alquilar contenido usando tickets"
 msgctxt "#40011"
 msgid "Enable Up Next integration"
 msgstr "Habilitar integración con Up Next"
+
+msgctxt "#40012"
+msgid "User ID"
+msgstr "ID del Usuario"

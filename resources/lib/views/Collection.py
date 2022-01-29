@@ -1,10 +1,13 @@
 from .Base import Base
-from ..common import api, params
+from ..common import api
 
 class Collection(Base):
-    path = 'collection'
-    mixed = True
+    has_dirs = True
+    has_videos = True
+    collection_id = 0
+
+    def __init__(self, col_id: int):
+        self.collection_id = col_id
 
     def setItems(self):
-        collection_id = params['id']
-        self.items = api.collection(collection_id)
+        self.items = api.collection(self.collection_id)

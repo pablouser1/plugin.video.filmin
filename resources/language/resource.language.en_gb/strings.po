@@ -63,3 +63,7 @@ msgstr ""
 msgctxt "#40011"
 msgid "Enable Up Next integration"
 msgstr ""
+
+msgctxt "#40012"
+msgid "User ID"
+msgstr ""

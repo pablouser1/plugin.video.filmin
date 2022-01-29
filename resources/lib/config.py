@@ -15,10 +15,17 @@ class Config:
             'access': access
         }
 
+    def getUserId(self)-> int:
+        return self.addon.getSettingInt('user_id')
+
     def canBuy(self)-> bool:
         return self.addon.getSettingBool('tickets')
 
-    def setAuth(self, access_token: str, refresh_token: str, username: str):
+    def canSync(self)-> bool:
+        return self.addon.getSettingBool('sync')
+
+    def setAuth(self, access_token: str, refresh_token: str, username: str, user_id: int):
         self.addon.setSettingString('access_token', access_token)
         self.addon.setSettingString('refresh_token', refresh_token)
         self.addon.setSettingString('username', username)
+        self.addon.setSettingInt('user_id', user_id)

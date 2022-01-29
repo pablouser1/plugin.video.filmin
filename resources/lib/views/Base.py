@@ -26,14 +26,14 @@ class Base:
     static = False
 
     """
+    True if the directory contains both videos and folders. IF THIS IS TRUE, DON'T SET HAS_DIRS AND/OR STATIC TO TRUE
+    """
+    has_videos = False
+
+    """
     True if the directory is recursive, False if the directory only has videos
     """
     has_dirs = False
-
-    """
-    True if the directory contains both videos and folders. IF THIS IS TRUE, DON'T SET HAS_DIRS AND/OR STATIC TO TRUE
-    """
-    mixed = False
 
     """
     All items
@@ -55,15 +55,18 @@ class Base:
         if self.static:
             listing = Render.static(self.items)
         else:
-            # Render folder containing both videos and other folders
-            if self.mixed:
+            # Has both videos and dirs
+            if self.has_dirs and self.has_videos:
                 listing = Render.mix(self.items, self.folders_goTo)
-            else:
-                # Render folder with other folders
-                if self.has_dirs:
-                    listing = Render.folders(self.items, self.folders_goTo)
-                # Render folder with videos
-                else:
-                    listing = Render.videos(self.items)
+            # Only has dirs
+            elif self.has_dirs and not self.has_videos:
+                listing = Render.folders(self.items, self.folders_goTo)
+            # Only has videos
+            elif self.has_videos and not self.has_dirs:
+                listing = Render.videos(self.items)
 
         Render.createDirectory(listing)
+
+    def run(self):
+        self.setItems()
+        self.show()

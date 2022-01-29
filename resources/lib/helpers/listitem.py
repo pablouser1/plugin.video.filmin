@@ -37,6 +37,8 @@ def setInfoVideo(url: str, item: dict)-> ListItem:
     art = getArt(item["imageResources"]["data"])
     list_item.setArt(art)
     list_item.setInfo('video', info)
+    list_item.setProperty('isPlayable', 'true')
+    list_item.setIsFolder(False)
     return list_item
 
 def setInfoFolder(url: str, item: dict)-> ListItem:

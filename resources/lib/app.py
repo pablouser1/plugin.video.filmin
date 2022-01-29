@@ -1,10 +1,8 @@
-from .router import Router
+from .routes import dispatch
 from .session import askLogin
 from .common import config, api
 
 def run():
-    # Start router
-    router = Router()
     # Check if user already has a session
     if config.hasLoginData():
         token_info = config.getToken()
@@ -13,4 +11,4 @@ def run():
     else:
         askLogin()
 
-    router.push()
+    dispatch()

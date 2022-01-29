@@ -3,9 +3,8 @@ from .Base import Base
 from ..common import api
 
 class Catalog(Base):
-    path = 'catalog'
-    mixed = True
-
+    has_dirs = True
+    has_videos = True
     def setItems(self):
         # TYPE (show or film)
         allowed_types = [

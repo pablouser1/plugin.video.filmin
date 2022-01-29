@@ -33,6 +33,15 @@
           </constraints>
           <control type="edit" format="string" />
         </setting>
+        <setting id="user_id" type="integer" label="40012">
+          <level>0</level>
+          <default>0</default>
+          <enable>false</enable>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="integer" />
+        </setting>
         <setting id="logout" type="action" label="40006">
           <level>0</level>
           <data>RunPlugin(plugin://$ID?action=logout)</data>

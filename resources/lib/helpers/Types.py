@@ -1,7 +1,7 @@
-videos_type = [
+videos_type = (
     "short", "film", "episode"
-]
+)
 
-folders_type = [
+folders_type = (
     "serie", "season"
-]
+)

@@ -1,8 +1,9 @@
+from xbmc import sleep
 from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 from ..common import api, config, _HANDLE
 from ..helpers.listitem import setInfoVideo
-from ..user import User
+# from .Player import Player
 from ..exceptions.DRMException import DRMException
 from ..exceptions.StreamException import StreamException
 
@@ -18,8 +19,9 @@ class Play():
         self.canWatch = len(self.item['user_data']['can_watch']['data']) > 0
 
     def buyMedia(self):
-        user = User()
-        self.bought = Dialog().yesno('Tickets', f'This content is not avaiable. Do you want to rent it using a ticket? You have {user.tickets} tickets left')
+        user = api.user()
+        tickets = len(res['tickets']['data'])
+        self.bought = Dialog().yesno('Tickets', f'This content is not avaiable. Do you want to rent it using a ticket? You have {tickets} tickets left')
         if self.bought:
             api.useTicket(self.item['id'])
 
@@ -75,5 +77,14 @@ class Play():
                     raise DRMException()
             # Start playing
             setResolvedUrl(_HANDLE, True, play_item)
+            """
+            player = Player(config.canSync(),
+                config.getUserId(),
+                self.item['id'],
+                version['id'],
+                stream['media_viewing_id'],
+                config.getToken()['access'])
+            player.play(listitem=play_item)
+            """
         else:
             Dialog().ok('Eror', 'This item is not available')

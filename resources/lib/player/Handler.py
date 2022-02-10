@@ -1,9 +1,9 @@
-from xbmc import sleep
+from xbmc import Monitor
 from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 from ..common import api, config, _HANDLE
 from ..helpers.listitem import setInfoVideo
-# from .Player import Player
+from .Player import Player
 from ..exceptions.DRMException import DRMException
 from ..exceptions.StreamException import StreamException
 
@@ -76,8 +76,7 @@ class Play():
                 else:
                     raise DRMException()
             # Start playing
-            setResolvedUrl(_HANDLE, True, play_item)
-            """
+            monitor = Monitor()
             player = Player(config.canSync(),
                 config.getUserId(),
                 self.item['id'],
@@ -85,6 +84,8 @@ class Play():
                 stream['media_viewing_id'],
                 config.getToken()['access'])
             player.play(listitem=play_item)
-            """
+            setResolvedUrl(_HANDLE, True, play_item)
+            while not monitor.abortRequested():
+                monitor.waitForAbort(5)
         else:
             Dialog().ok('Eror', 'This item is not available')

@@ -1,5 +1,6 @@
 import xbmc
 import xbmcgui
+from threading import Timer
 from .Mediamark import Mediamark
 
 class Player(xbmc.Player):
@@ -11,8 +12,8 @@ class Player(xbmc.Player):
     FILMIN TIMES ARE IN MILISECONDS
     """
     can_sync = False
-    ended = False
     mediamark: Mediamark
+    timer: Timer
 
     def __init__(self, can_sync: bool, user_id: int, media_id: int, version_id: int, media_viewing_id: int, session_id: str):
         xbmc.Player.__init__(self)
@@ -22,9 +23,18 @@ class Player(xbmc.Player):
             xbmc.log('Enabling sync to FILMIN', xbmc.LOGINFO)
             self.mediamark = Mediamark(user_id, media_id, version_id, media_viewing_id, session_id)
 
+    def sync(self):
+        if self.can_sync:
+            time = self.getTime()
+            time_ms = time * 1000
+            xbmc.log(f'Syncing to Filmin at {time} seconds', xbmc.LOGINFO)
+            self.mediamark.sync(time_ms)
+
     def onAVStarted(self):
         if self.can_sync:
-            self.mediamark.setToken()
+            interval = self.mediamark.init()
+            self.timer = Timer(interval / 1000, self.sync)
+            self.timer.start()
             filmin_position = self.mediamark.getInitialPos() / 1000 # Last position set by Filmin converted to seconds
             kodi_position = self.getTime() # Kodi last position, already in seconds
             # Move video to Filmin position
@@ -33,24 +43,10 @@ class Player(xbmc.Player):
             self.seekTime(seek_to) # seekTime is relative to the current Kodi position
 
     def onPlayBackSeek(self, time: int, seekOffset: int):
-        if self.can_sync:
-            xbmc.log(f'Syncing to Filmin at {time} seconds', xbmc.LOGINFO)
-            time_ms = time * 1000
-            self.mediamark.sync(time_ms)
+        self.sync()
 
     def onPlayBackPaused(self):
-        if self.can_sync:
-            time = self.getTime()
-            time_ms = time * 1000
-            xbmc.log(f'Syncing to Filmin at {time} seconds', xbmc.LOGINFO)
-            self.mediamark.sync(time_ms)
+        self.sync()
 
     def onPlayBackStopped(self):
-        if self.can_sync:
-            time = self.getTime()
-            time_ms = time * 1000
-            xbmc.log(f'Syncing to Filmin at {time} seconds', xbmc.LOGINFO)
-            self.mediamark.sync(time_ms)
-
-    def onPlayBackEnded(self):
-        self.ended = True
+        self.timer.cancel()

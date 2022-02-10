@@ -1,6 +1,5 @@
 import requests
-import xbmc
-from .helpers.Methods import Methods
+from xbmc import getLanguage, ISO_639_1
 from .exceptions.ApiException import ApiException
 
 class Api:
@@ -13,20 +12,19 @@ class Api:
 
     def __init__(self):
         self.s.headers["X-CLIENT-ID"] = self.CLIENT_ID
-        self.s.headers["clientlanguage"] = xbmc.getLanguage(xbmc.ISO_639_1, True)
+        self.s.headers["clientlanguage"] = getLanguage(ISO_639_1, True)
         self.s.headers["clientversion"] = '4.2.316' # Latest Filmin version Android
         self.s.headers["devicemodel"] = 'Kodi'
 
-    def makeRequest(self, endpoint: str, method: str = Methods.GET, body: dict = None, query: dict = None):
+    def makeRequest(self, endpoint: str, method = 'GET', body: dict = {}, query: dict = {}):
         res = self.s.request(method, self.BASE_URL + endpoint, json=body, params=query)
         res_json = res.json()
         if res.ok:
             return res_json
-        else:
-            raise ApiException(res_json['errors'])
+        raise ApiException(res_json['errors'])
 
     def login(self, username: str, password: str)-> dict:
-        res = self.makeRequest('/oauth/access_token', Methods.POST, {
+        res = self.makeRequest('/oauth/access_token', 'POST', {
             "client_id": self.CLIENT_ID,
             "client_secret": self.CLIENT_SECRET,
             "grant_type": "password",
@@ -36,7 +34,7 @@ class Api:
         return res
 
     def logout(self):
-        self.makeRequest('/oauth/logout', Methods.POST)
+        self.makeRequest('/oauth/logout', 'POST')
 
     def setToken(self, token: str):
         self.s.headers["Authorization"] = f'Bearer {token}'
@@ -136,7 +134,7 @@ class Api:
         return items
 
     def useTicket(self, item_id: int):
-        self.makeRequest(endpoint='/user/tickets/activate', method=Methods.POST, body={
+        self.makeRequest(endpoint='/user/tickets/activate', method='POST', body={
             'id': item_id
         })
 

@@ -26,7 +26,7 @@ class Base:
     static = False
 
     """
-    True if the directory contains both videos and folders. IF THIS IS TRUE, DON'T SET HAS_DIRS AND/OR STATIC TO TRUE
+    True if the directory contains videos
     """
     has_videos = False
 

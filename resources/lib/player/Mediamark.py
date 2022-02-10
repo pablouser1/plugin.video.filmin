@@ -19,8 +19,9 @@ class Mediamark:
         self.MEDIA_VIEWING_ID = media_viewing_id
         self.SESSION_ID = session_id
         self.s.headers["X-CLIENT-ID"] = self.CLIENT_ID
+        self.s.headers["Authorization"] = f'Token {self.AUTH_TOKEN}'
 
-    def setToken(self):
+    def init(self):
         res = self.s.post(self.BASE_URL + '/token', data={
             'media_id': self.MEDIA_ID,
             'user_id': self.USER_ID,
@@ -29,6 +30,7 @@ class Mediamark:
 
         res_json = res.json()
         self.TOKEN = res_json['data']['token']
+        return res_json['data']['interval']
 
     def getInitialPos(self)-> int:
         res = self.s.get(self.BASE_URL, params={
@@ -36,7 +38,7 @@ class Mediamark:
         })
 
         res_json = res.json()
-        return int(res_json['data']['position'])
+        return int(float(res_json['data']['position']))
 
     def sync(self, time: int):
         self.s.post(self.BASE_URL, data={
@@ -50,6 +52,3 @@ class Mediamark:
             'session_connections': 2,
             'subtitle_id': 0
         })
-
-    def sendPos(self):
-        pass

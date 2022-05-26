@@ -1,24 +1,21 @@
 # Filmin Kodi
+Reproduce tu contenido de Filmin favorito usando Kodi ≥ 19 (Matrix)
 
-**English** / [Español](README.es-es.md)
-
-Play your favorites Filmin movies and shows using Kodi ≥ 19 (Matrix)
-
-## How to install
-Download the zip from the releases tab and install it using Kodi.
+## Cómo instalar
+Descarga el zip encontrado en la pestaña de "Releases" e instálalo en Kodi.
 
 ## Roadmap
-### Features added
-* Auth
-* DRM and non-DRM play with the ability to choose audio and subtitles
-* Search
+### Funciones agregadas
+* Autorización
+* Reproducción con DRM y sin DRM, pudiendo elegir audio y subtítulos
+* Búsqueda
 * Highlights
-* Collections
+* Colecciones
 * Watching
-* Playlists
+* Listas de reproducción
+* Sincronizar progreso de visionado con Filmin
 
-### Priority
-* Sync progress to Filmin
-* Up Next Integration
-* Festivals
-* Sort
+### Prioridades
+* Integración con Up Next
+* Festivales
+* Ordenar

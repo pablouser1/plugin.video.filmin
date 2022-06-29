@@ -67,3 +67,39 @@ msgstr "Habilitar integración con Up Next"
 msgctxt "#40012"
 msgid "User ID"
 msgstr "ID del Usuario"
+
+msgctxt "#40013"
+msgid "Search"
+msgstr "Buscar"
+
+msgctxt "#40014"
+msgid "Catalog"
+msgstr "Catálogo"
+
+msgctxt "#40015"
+msgid "Purchaseds"
+msgstr "Comprado"
+
+msgctxt "#40016"
+msgid "Highlighteds"
+msgstr "Destacado"
+
+msgctxt "#40017"
+msgid "Collections"
+msgstr "Colecciones"
+
+msgctxt "#40018"
+msgid "Watching"
+msgstr "Continuar viendo"
+
+msgctxt "#40019"
+msgid "My playlists"
+msgstr "Mis listas de reproducción"
+
+msgctxt "#40020"
+msgid "Type your username/email"
+msgstr "Escribe tu nombre de usuario / correo electrónico"
+
+msgctxt "#40021"
+msgid "Type your password"
+msgstr "Escribe tu contraseña"

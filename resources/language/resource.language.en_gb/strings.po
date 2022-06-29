@@ -67,3 +67,43 @@ msgstr ""
 msgctxt "#40012"
 msgid "User ID"
 msgstr ""
+
+msgctxt "#40013"
+msgid "Search"
+msgstr ""
+
+msgctxt "#40014"
+msgid "Catalog"
+msgstr ""
+
+msgctxt "#40015"
+msgid "Purchaseds"
+msgstr ""
+
+msgctxt "#40016"
+msgid "Highlighteds"
+msgstr ""
+
+msgctxt "#40017"
+msgid "Collections"
+msgstr ""
+
+msgctxt "#40018"
+msgid "Watching"
+msgstr ""
+
+msgctxt "#40019"
+msgid "My playlists"
+msgstr ""
+
+msgctxt "#40020"
+msgid "Type your username/email"
+msgstr ""
+
+msgctxt "#40021"
+msgid "Type your password"
+msgstr ""
+
+msgctxt "#40022"
+msgid "Logged in successfully"
+msgstr ""

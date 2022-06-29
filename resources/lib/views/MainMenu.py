@@ -1,4 +1,5 @@
 from .Base import Base
+from ..common import config
 
 class MainMenu(Base):
     """
@@ -8,30 +9,30 @@ class MainMenu(Base):
     items = [
         {
             "id": "search",
-            "title": "Search"
-        },
-        {
-            "id": "catalog",
-            "title": "Catalog"
-        },
-        {
-            "id": "purchased",
-            "title": "Purchased"
-        },
-        {
-            "id": "highlighteds",
-            "title": "Highlighteds"
-        },
-        {
-            "id": "collections",
-            "title": "Collections"
+            "title": config.getLocalizedString(40013)
         },
         {
             "id": "watching",
-            "title": "Watching"
+            "title": config.getLocalizedString(40018)
+        },
+        {
+            "id": "catalog",
+            "title": config.getLocalizedString(40014)
+        },
+        {
+            "id": "purchased",
+            "title": config.getLocalizedString(40015)
+        },
+        {
+            "id": "highlighteds",
+            "title": config.getLocalizedString(40016)
+        },
+        {
+            "id": "collections",
+            "title": config.getLocalizedString(40017)
         },
         {
             "id": "playlists",
-            "title": "My playlists"
+            "title": config.getLocalizedString(40019)
         }
     ]

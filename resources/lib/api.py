@@ -1,27 +1,45 @@
 import requests
 from xbmc import getLanguage, ISO_639_1
-from .exceptions.ApiException import ApiException
+from .exceptions.ApiV3Exception import ApiV3Exception
+from .exceptions.UApiException import UApiException
 
 class Api:
-    BASE_URL = "https://apiv3.filmin.es"
+    API_URL = "https://apiv3.filmin.es"
+    UAPI_URL = "https://uapi.filmin.es"
     s = requests.Session()
 
     # Both extracted from the Android app
     CLIENT_ID = "zXZXrpum7ayGcWlo"
     CLIENT_SECRET = "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm"
 
-    def __init__(self):
-        self.s.headers["X-CLIENT-ID"] = self.CLIENT_ID
-        self.s.headers["clientlanguage"] = getLanguage(ISO_639_1, True)
-        self.s.headers["clientversion"] = '4.2.316' # Latest Filmin version Android
-        self.s.headers["devicemodel"] = 'Kodi'
+    DEVICE_MODEL = 'Kodi'
+    DEVICE_OS_VERSION = '12'
+    CLIENT_VERSION = "4.2.440"
 
-    def makeRequest(self, endpoint: str, method = 'GET', body: dict = {}, query: dict = {}):
-        res = self.s.request(method, self.BASE_URL + endpoint, json=body, params=query)
+    def __init__(self):
+        self.s.headers["X-Client-Id"] = self.CLIENT_ID
+        self.s.headers["clientlanguage"] = getLanguage(ISO_639_1, True)
+
+        self.s.headers["clientversion"] = self.CLIENT_VERSION
+        self.s.headers["X-Client-Version"] = self.CLIENT_VERSION
+
+        self.s.headers["devicemodel"] = self.DEVICE_MODEL
+        self.s.headers["X-Device-Model"] = self.DEVICE_MODEL
+
+        self.s.headers['deviceosversion'] = self.DEVICE_OS_VERSION
+        self.s.headers['X-Device-OS-Version'] = self.DEVICE_OS_VERSION
+
+    def makeRequest(self, endpoint: str, method = 'GET', body: dict = {}, query: dict = {}, useUapi: bool = False):
+        base_url = self.UAPI_URL if useUapi else self.API_URL
+        res = self.s.request(method, base_url + endpoint, json=body, params=query)
         res_json = res.json()
         if res.ok:
             return res_json
-        raise ApiException(res_json['errors'])
+
+        if useUapi:
+            raise UApiException(res_json['error'])
+        else:
+            raise ApiV3Exception(res_json['errors'])
 
     def login(self, username: str, password: str)-> dict:
         res = self.makeRequest('/oauth/access_token', 'POST', {
@@ -33,11 +51,12 @@ class Api:
         })
         return res
 
+    def profiles(self)-> list:
+        res = self.makeRequest('/auth/profiles', useUapi=True)
+        return res
+
     def logout(self):
         self.makeRequest('/oauth/logout', 'POST')
-
-    def setToken(self, token: str):
-        self.s.headers["Authorization"] = f'Bearer {token}'
 
     def user(self):
         res = self.makeRequest(endpoint='/user')
@@ -94,11 +113,9 @@ class Api:
 
     def watching(self)-> list:
         items = []
-        res = self.makeRequest(endpoint='/user/watching', query={
-            'limit': 5
-        })
+        res = self.makeRequest(endpoint='/auth/keep-watching', useUapi=True)
         for item in res['data']:
-            items.append(item['entity']['data'])
+            items.append(item['media'])
 
         return items
 
@@ -163,3 +180,10 @@ class Api:
             })
 
         return versions
+
+    # -- HELPERS -- #
+    def setToken(self, token: str):
+        self.s.headers["Authorization"] = f'Bearer {token}'
+
+    def setProfileId(self, profile_id: str):
+        self.s.headers['x-user-profile-id'] = profile_id

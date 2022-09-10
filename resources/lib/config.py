@@ -21,6 +21,9 @@ class Config:
     def getUserId(self)-> int:
         return self.addon.getSettingInt('user_id')
 
+    def getProfileId(self)-> str:
+        return self.addon.getSettingString('profile_id')
+
     def canBuy(self)-> bool:
         return self.addon.getSettingBool('tickets')
 
@@ -32,3 +35,6 @@ class Config:
         self.addon.setSettingString('refresh_token', refresh_token)
         self.addon.setSettingString('username', username)
         self.addon.setSettingInt('user_id', user_id)
+
+    def setProfileId(self, profile_id: str):
+        self.addon.setSettingString('profile_id', profile_id)

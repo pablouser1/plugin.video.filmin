@@ -103,3 +103,11 @@ msgstr "Escribe tu nombre de usuario / correo electrónico"
 msgctxt "#40021"
 msgid "Type your password"
 msgstr "Escribe tu contraseña"
+
+msgctxt "#40023"
+msgid "Profile ID"
+msgstr "ID del perfil"
+
+msgctxt "#40024"
+msgid "Change profile"
+msgstr "Cambiar perfil"

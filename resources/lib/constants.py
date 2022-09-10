@@ -1,7 +1,6 @@
-def __enum(**enums):
-    return type('Enum', (), enums)
+from .helpers.Misc import enum
 
-ROUTES = __enum(
+ROUTES = enum(
     HOME='home',
     CATALOG='catalog',
     SEARCH='search',

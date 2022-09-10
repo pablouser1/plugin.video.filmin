@@ -71,5 +71,14 @@ def _player(item_id: int):
     play.start()
 
 def dispatch():
-    mode = params.get('menu', 'home')
-    dispatcher.run(mode)
+    if params.get('action'):
+        action = params.get('action')
+        if action == 'logout':
+            from .session import startLogout
+            startLogout()
+        elif action == 'profile':
+            from .session import changeProfile
+            changeProfile(notify=True)
+    else:
+        mode = params.get('menu', 'home')
+        dispatcher.run(mode)

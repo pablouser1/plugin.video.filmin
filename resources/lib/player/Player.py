@@ -14,12 +14,12 @@ class Player(xbmc.Player):
     mediamark: Mediamark
     timer: Timer
 
-    def __init__(self, can_sync: bool, user_id: int, media_id: int, version_id: int, media_viewing_id: int, session_id: str):
+    def __init__(self, can_sync: bool, user_id: int, profile_id: str, media_id: int, version_id: int, media_viewing_id: int, session_id: str):
         xbmc.Player.__init__(self)
         self.can_sync = can_sync
         if self.can_sync:
             xbmc.log('Enabling sync to FILMIN', xbmc.LOGINFO)
-            self.mediamark = Mediamark(user_id, media_id, version_id, media_viewing_id, session_id)
+            self.mediamark = Mediamark(user_id, profile_id, media_id, version_id, media_viewing_id, session_id)
 
     def sync(self):
         if self.can_sync:

@@ -107,3 +107,11 @@ msgstr ""
 msgctxt "#40022"
 msgid "Logged in successfully"
 msgstr ""
+
+msgctxt "#40023"
+msgid "Profile ID"
+msgstr ""
+
+msgctxt "#40024"
+msgid "Change profile"
+msgstr ""

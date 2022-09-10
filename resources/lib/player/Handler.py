@@ -2,7 +2,7 @@ from xbmc import Monitor
 from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 from ..common import api, config, _HANDLE
-from ..helpers.listitem import setInfoVideo
+from ..helpers.ListItemExtra import ListItemExtra
 from .Player import Player
 from ..exceptions.DRMException import DRMException
 from ..exceptions.StreamException import StreamException
@@ -62,7 +62,7 @@ class Play():
                 subtitles.append(subtitle['subtitleFiles']['data'][0]['path'])
 
             stream = self.streamPicker(version['id'])
-            play_item = setInfoVideo(stream['src'], self.item)
+            play_item = ListItemExtra.videoApiv3(stream['src'], self.item)
             play_item.setSubtitles(subtitles)
             # Add DRM config
             if stream["drm"]:
@@ -79,6 +79,7 @@ class Play():
             monitor = Monitor()
             player = Player(config.canSync(),
                 config.getUserId(),
+                config.getProfileId(),
                 self.item['id'],
                 version['id'],
                 stream['media_viewing_id'],

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.filmin" name="Filmin" version="1.4.2" provider-name="pablouser1">
+<addon id="plugin.video.filmin" name="Filmin" version="1.5.0" provider-name="pablouser1">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
     <import addon="script.module.requests" version="2.22.0+matrix.1" />
@@ -18,6 +18,10 @@
     <license>GPL-3.0-or-later</license>
     <website>https://github.com/pablouser1/plugin.video.filmin</website>
     <source>http://github.com/pablouser1/plugin.video.filmin</source>
+    <news>v1.5.0 (10/09/2022)
+      Implementado sistema de perfiles
+      IMPORTANTE: Cierra sesión antes de utilizar si vienes de una versión anterior
+    </news>
     <assets>
       <icon>resources/icon.png</icon>
       <fanart>resources/fanart.jpg</fanart>

@@ -52,6 +52,10 @@ class ListItemExtra:
             "userrating": item["avg_votes_users"] if item.get("avg_votes_users") else None,
             "duration": item["duration"] * 60 # Filmin returns duration in minutes, Kodi wants it in seconds
         }
+
+        if item.get('is_premier', False):
+            info['plot'] += '\n\n(PARA ALQUILAR)'
+
         list_item.setInfo('video', info)
         # ART
         art = Art.apiv3(item["imageResources"]["data"])

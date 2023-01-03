@@ -16,7 +16,7 @@ class Play():
 
     def __init__(self, el_id: int):
         self.item = api.getMediaSimple(el_id)
-        self.canWatch = len(self.item['user_data']['can_watch']['data']) > 0
+        self.canWatch = len(self.item['user_data']['can_watch']['data']) > 0 if 'can_watch' in self.item['user_data'] else True
 
     def buyMedia(self):
         user = api.user()
@@ -30,7 +30,7 @@ class Play():
         Return version that user selects
         """
         versions_api = self.item['versions']['data']
-        # Excluse offline versions
+        # Exclude offline versions
         versions_filtered = list(filter(lambda version: not version['offline'], versions_api))
         versions_show = []
         for version_temp in versions_filtered:

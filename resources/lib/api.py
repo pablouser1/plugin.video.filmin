@@ -9,7 +9,7 @@ class Api:
     s = requests.Session()
 
     # Both extracted from the Android app
-    CLIENT_ID = "zXZXrpum7ayGcWlo"
+    CLIENT_ID = "5dV4xPOpaTPjPpNm"
     CLIENT_SECRET = "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm"
 
     DEVICE_MODEL = 'Kodi'

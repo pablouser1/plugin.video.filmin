@@ -1,4 +1,4 @@
-name: Create ZIP
+name: Create release with ZIP
 on:
   push:
     branches:
@@ -10,12 +10,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - name: Get XML
-        id: getxml
+      - name: Get Version
+        id: version
         uses: howbout-ltd/get-xml-info@master
         with:
           xml-file: "addon.xml"
           xpath: "//addon/@version"
+      - name: Get changelog
+        id: changelog
+        uses: howbout-ltd/get-xml-info@master
+        with:
+          xml-file: "addon.xml"
+          xpath: "//addon/extension[2]/news"
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
@@ -30,5 +36,6 @@ jobs:
           artifacts: "../filmin-kodi-release.zip"
           artifactContentType: application/zip
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ steps.getxml.outputs.info }}
+          tag: v${{ steps.version.outputs.info }}
+          body: ${{ steps.changelog.outputs.info }}
           allowUpdates: true

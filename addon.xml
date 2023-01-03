@@ -19,12 +19,8 @@
     <website>https://github.com/pablouser1/plugin.video.filmin</website>
     <source>http://github.com/pablouser1/plugin.video.filmin</source>
     <news>
-      v1.5.1 (03/01/2023)
-      Arreglados varios errores que hacían imposible reproducir contenido
-      ---
-      v1.5.0 (10/09/2022)
-      Implementado sistema de perfiles
-      IMPORTANTE: Cierra sesión antes de utilizar si vienes de una versión anterior
+    v1.5.1 (03/01/2023)
+    Arreglados varios errores que hacían imposible reproducir contenido
     </news>
     <assets>
       <icon>resources/icon.png</icon>

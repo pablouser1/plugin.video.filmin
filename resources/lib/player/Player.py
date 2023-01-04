@@ -47,4 +47,5 @@ class Player(xbmc.Player):
         self.sync()
 
     def onPlayBackStopped(self):
-        self.timer.cancel()
+        if self.can_sync:
+            self.timer.cancel()

@@ -3,6 +3,7 @@ from xbmcgui import Dialog, ListItem
 from xbmcplugin import setResolvedUrl
 from ..common import api, config, _HANDLE
 from ..helpers.ListItemExtra import ListItemExtra
+from ..helpers.Misc import isDrm
 from .Player import Player
 from ..exceptions.DRMException import DRMException
 from ..exceptions.StreamException import StreamException
@@ -42,13 +43,6 @@ class Play():
         version = versions_filtered[index]
         return version
 
-    def streamPicker(self, version_id: int)-> dict:
-        # Choose first stream available
-        streams = api.getStreams(version_id)
-        if len(streams) == 0:
-            raise StreamException()
-        return streams[0]
-
     def start(self):
         if not self.canWatch and config.canBuy():
             self.buyMedia()
@@ -61,11 +55,12 @@ class Play():
             for subtitle in subtitles_api:
                 subtitles.append(subtitle['subtitleFiles']['data'][0]['path'])
 
-            stream = self.streamPicker(version['id'])
+            streams = api.getStreams(version['id'])
+            stream = streams['feeds'][0]
             play_item = ListItemExtra.videoApiv3(stream['src'], self.item)
             play_item.setSubtitles(subtitles)
             # Add DRM config
-            if stream["drm"]:
+            if isDrm(stream['type']):
                 import inputstreamhelper # pylint: disable=import-error
                 is_helper = inputstreamhelper.Helper(self.PROTOCOL, drm=self.DRM)
                 if is_helper.check_inputstream():
@@ -82,7 +77,7 @@ class Play():
                 config.getProfileId(),
                 self.item['id'],
                 version['id'],
-                stream['media_viewing_id'],
+                streams['media_viewing_id'],
                 config.getToken()['access'])
             player.play(listitem=play_item)
             setResolvedUrl(_HANDLE, True, play_item)

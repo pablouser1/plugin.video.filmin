@@ -9,12 +9,12 @@ class Api:
     s = requests.Session()
 
     # Both extracted from the Android app
-    CLIENT_ID = "5dV4xPOpaTPjPpNm"
+    CLIENT_ID = "zXZXrpum7ayGcWlo"
     CLIENT_SECRET = "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm"
 
     DEVICE_MODEL = 'Kodi'
     DEVICE_OS_VERSION = '12'
-    CLIENT_VERSION = "4.2.440"
+    CLIENT_VERSION = "4.3.4"
 
     def __init__(self):
         self.s.headers["X-Client-Id"] = self.CLIENT_ID
@@ -155,31 +155,23 @@ class Api:
             'id': item_id
         })
 
-    def getStreams(self, item_id: int):
-        versions = []
+    def getStreams(self, item_id: int) -> dict:
         res = self.makeRequest(endpoint=f'/version/{item_id}')
+        streams = {}
+        # -- Single feed -- #
+        if not 'feeds' in res:
+            # We have to convert it to the multi-feed response
+            streams = {
+                'feeds': [res],
+                'media_viewing_id': res['media_viewing_id'],
+                'xml': res['xml']
+            }
+        # -- More than one feed -- #
+        else:
+            # Leave it as it is
+            streams = res
 
-        # -- FILMIN V2 (DRM) -- #
-        # Multiple feeds
-        if 'feeds' in res:
-            for feed in res['feeds']:
-                feed["drm"] = True
-                versions.append(feed)
-        # Only one feed
-        elif type(res) is dict and 'license_url' in res:
-            res["drm"] = True
-            versions.append(res)
-
-        # -- FILMIN V1 (DRM-FREE) -- #
-        elif 'FLVURL' in res:
-            versions.append({
-                "type": "FLVURL",
-                "src": res["FLVURL"],
-                "media_viewing_id": res["media_viewing_id"],
-                "drm": False
-            })
-
-        return versions
+        return streams
 
     # -- HELPERS -- #
     def setToken(self, token: str):

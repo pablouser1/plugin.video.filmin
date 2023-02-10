@@ -12,6 +12,9 @@ class Config:
             return True
         return False
 
+    def getDomain(self)-> str:
+        return self.addon.getSettingString('domain')
+
     def getToken(self)-> dict:
         access = self.addon.getSettingString('access_token')
         return {

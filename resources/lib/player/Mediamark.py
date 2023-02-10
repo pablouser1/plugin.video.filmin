@@ -1,8 +1,9 @@
 import requests
 from xbmc import getLanguage, ISO_639_1
+from ..common import config
 
 class Mediamark:
-    BASE_URL = "https://bm.filmin.es/mediamarks"
+    BASE_URL = "https://bm.filmin.es/mediamarks" # Default URL
     AUTH_TOKEN = "Njk1MzM5MjAtNDVmNi0xMWUzLThmOTYtMDgwMDIwMGM5YTY2" # I -- THINK -- this is hardcoded, I hope so.
     s = requests.Session()
     TOKEN = ''
@@ -30,6 +31,11 @@ class Mediamark:
         self.s.headers["devicemodel"] = self.DEVICE_MODEL
         self.s.headers['deviceosversion'] = self.DEVICE_OS_VERSION
         self.s.headers['X-User-Profile-Id'] = self.PROFILE_ID
+        self.setMarkBaseUrl(config.getDomain())
+
+    def setMarkBaseUrl(self, domain: str)-> str:
+        host = "filminlatino" if domain == 'mx' else 'filmin'
+        self.BASE_URL = f"https://bm.{host}.{domain}"
 
     def init(self):
         res = self.s.post(self.BASE_URL + '/token', data={

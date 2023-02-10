@@ -27,5 +27,4 @@ class Art:
             "poster": item.get("image_poster"),
             "card": item.get("image_card"),
             "landscape": item.get("image_highlighted")
-            # "thumb":
         }

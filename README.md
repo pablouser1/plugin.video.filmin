@@ -34,6 +34,7 @@ Descarga el archivo .zip generado por Github e instálalo.
 * Watching
 * Listas de reproducción
 * Sincronizar progreso de visionado con Filmin
+* Soporte para Portugal y México
 
 ### Prioridades
 * Integración con Up Next

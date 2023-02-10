@@ -21,8 +21,8 @@ class Play():
 
     def buyMedia(self):
         user = api.user()
-        tickets = len(res['tickets']['data'])
-        self.bought = Dialog().yesno('Tickets', f'This content is not avaiable. Do you want to rent it using a ticket? You have {tickets} tickets left')
+        tickets = len(user['tickets']['data'])
+        self.bought = Dialog().yesno(config.getLocalizedString(40050), config.getLocalizedString(40051) % tickets)
         if self.bought:
             api.useTicket(self.item['id'])
 
@@ -39,7 +39,7 @@ class Play():
             list_item = ListItem(label=label)
             versions_show.append(list_item)
 
-        index = Dialog().select('Choose a version', versions_show)
+        index = Dialog().select(config.getLocalizedString(40052), versions_show)
         version = versions_filtered[index]
         return version
 
@@ -84,4 +84,4 @@ class Play():
             while not monitor.abortRequested():
                 monitor.waitForAbort(5)
         else:
-            Dialog().ok('Eror', 'This item is not available')
+            Dialog().ok('Error', config.getLocalizedString(40053))

@@ -16,98 +16,168 @@ msgstr ""
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# -- General config -- #
 msgctxt "#40000"
-msgid "Account"
-msgstr "Cuenta"
-
-msgctxt "#40001"
-msgid "Login info"
-msgstr "Datos de la sesión"
-
-msgctxt "#40002"
-msgid "Username"
-msgstr "Nombre de usuario"
-
-msgctxt "#40003"
-msgid "Tokens"
-msgstr "Tokens"
-
-msgctxt "#40004"
-msgid "Access Token"
-msgstr "Access Token"
-
-msgctxt "#40005"
-msgid "Refresh Token"
-msgstr "Refresh Token"
-
-msgctxt "#40006"
-msgid "Logout"
-msgstr "Cerrar sesión"
-
-msgctxt "#40007"
 msgid "General"
 msgstr "General"
 
-msgctxt "#40008"
+msgctxt "#40001"
 msgid "Features"
 msgstr "Funciones"
 
-msgctxt "#40009"
-msgid "Sync progress with Filmin"
-msgstr "Sincronizar progreso con Filmin"
+msgctxt "#40002"
+msgid "Region"
+msgstr "Región"
 
+msgctxt "#40003"
+msgid "Allow syncing with Filmin"
+msgstr "Permitir sincronización de visionado con Filmin"
+
+msgctxt "#40004"
+msgid "Allow using tickets"
+msgstr "Permitir usar tickets"
+
+msgctxt "#40005"
+msgid "Enable UpNext integration (WIP)"
+msgstr "Habilitar integración con UpNext (EN DESARROLLO)"
+
+# -- Login config -- #
 msgctxt "#40010"
-msgid "Allow renting media with tickets"
-msgstr "Permitir alquilar contenido usando tickets"
+msgid "Login"
+msgstr "Sesión"
 
 msgctxt "#40011"
-msgid "Enable Up Next integration"
-msgstr "Habilitar integración con Up Next"
+msgid "Account"
+msgstr "Cuenta"
 
 msgctxt "#40012"
-msgid "User ID"
-msgstr "ID del Usuario"
+msgid "Username"
+msgstr "Nombre de usuario"
 
 msgctxt "#40013"
+msgid "User ID"
+msgstr "ID de usuario"
+
+msgctxt "#40014"
+msgid "Profile ID"
+msgstr "ID de perfil"
+
+msgctxt "#40015"
+msgid "Change profile"
+msgstr "Cambiar de perfil"
+
+msgctxt "#40016"
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+msgctxt "#40017"
+msgid "Access token"
+msgstr "Access token"
+
+msgctxt "#40018"
+msgid "Refresh token"
+msgstr "Refresh token"
+
+# -- Main menu -- #
+msgctxt "#40020"
 msgid "Search"
 msgstr "Buscar"
 
-msgctxt "#40014"
+msgctxt "#40021"
+msgid "Currently watching"
+msgstr "En progreso"
+
+msgctxt "#40022"
 msgid "Catalog"
 msgstr "Catálogo"
 
-msgctxt "#40015"
-msgid "Purchaseds"
+msgctxt "#40023"
+msgid "Purchased"
 msgstr "Comprado"
 
-msgctxt "#40016"
+msgctxt "#40024"
 msgid "Highlighteds"
-msgstr "Destacado"
+msgstr "Destacados"
 
-msgctxt "#40017"
+msgctxt "#40025"
 msgid "Collections"
 msgstr "Colecciones"
 
-msgctxt "#40018"
-msgid "Watching"
-msgstr "Continuar viendo"
+msgctxt "#40026"
+msgid "Playlists"
+msgstr "Listas de reproducción"
 
-msgctxt "#40019"
-msgid "My playlists"
-msgstr "Mis listas de reproducción"
+# -- session.py -- #
+msgctxt "#40030"
+msgid "Write your username/email"
+msgstr "Escribe tu nombre de usuario/correo electrónico"
 
-msgctxt "#40020"
-msgid "Type your username/email"
-msgstr "Escribe tu nombre de usuario / correo electrónico"
-
-msgctxt "#40021"
-msgid "Type your password"
+msgctxt "#40031"
+msgid "Write your password"
 msgstr "Escribe tu contraseña"
 
-msgctxt "#40023"
-msgid "Profile ID"
-msgstr "ID del perfil"
+msgctxt "#40032"
+msgid "Logged in successfully"
+msgstr "Sesión iniciada con éxito"
 
-msgctxt "#40024"
-msgid "Change profile"
-msgstr "Cambiar perfil"
+msgctxt "#40033"
+msgid "Choose a profile"
+msgstr "Elige un perfil"
+
+msgctxt "#40034"
+msgid "Profile changed successfully"
+msgstr "Perfil activo cambiado con éxito"
+
+msgctxt "#40035"
+msgid "Logged out"
+msgstr "Sesión cerrada"
+
+# -- Views -- #
+msgctxt "#40040"
+msgid "Choose a media type"
+msgstr "Elige un tipo de media"
+
+msgctxt "#40041"
+msgid "Choose a genre"
+msgstr "Elige un género"
+
+msgctxt "#40042"
+msgid "Choose a subgenre"
+msgstr "Elige un subgénero"
+
+msgctxt "#40043"
+msgid "All"
+msgstr "Todo"
+
+msgctxt "#40044"
+msgid "TV Shows"
+msgstr "Series de TV"
+
+msgctxt "#40045"
+msgid "Movies"
+msgstr "Películas"
+
+msgctxt "#40046"
+msgid "Shorts"
+msgstr "Cortometrajes"
+
+msgctxt "#40047"
+msgid "RENTING ONLY"
+msgstr "PARA ALQUILAR"
+
+# -- Player -- #
+msgctxt "#40050"
+msgid "Tickets"
+msgstr "Tickets"
+
+msgctxt "#40051"
+msgid "This content is not avaiable. Do you want to rent it using a ticket? You have %d tickets left"
+msgstr "Este contenido no está disponible. ¿Quieres alquilarlo usando un ticket? Tienes %d tickets restantes"
+
+msgctxt "#40052"
+msgid "Choose a version"
+msgstr "Elige una versión"
+
+msgctxt "#40053"
+msgid "This item is not available"
+msgstr "No disponible"

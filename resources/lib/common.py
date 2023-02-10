@@ -7,4 +7,4 @@ _URL = argv[0]
 _HANDLE = int(argv[1])
 params = dict(parse_qsl(argv[2][1:]))
 config = Config()
-api = Api()
+api = Api(config.getDomain())

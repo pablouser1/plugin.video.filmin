@@ -31,7 +31,7 @@ class Base:
     has_videos = False
 
     """
-    True if the directory is recursive, False if the directory only has videos
+    True if the directory is recursive
     """
     has_dirs = False
 

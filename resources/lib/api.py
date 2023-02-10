@@ -4,8 +4,6 @@ from .exceptions.ApiV3Exception import ApiV3Exception
 from .exceptions.UApiException import UApiException
 
 class Api:
-    API_URL = "https://apiv3.filmin.es"
-    UAPI_URL = "https://uapi.filmin.es"
     s = requests.Session()
 
     # Both extracted from the Android app
@@ -14,9 +12,11 @@ class Api:
 
     DEVICE_MODEL = 'Kodi'
     DEVICE_OS_VERSION = '12'
-    CLIENT_VERSION = "4.3.4"
+    CLIENT_VERSION = "4.4.0"
 
-    def __init__(self):
+    domain = 'es'
+
+    def __init__(self, domain: str):
         self.s.headers["X-Client-Id"] = self.CLIENT_ID
         self.s.headers["clientlanguage"] = getLanguage(ISO_639_1, True)
 
@@ -29,8 +29,16 @@ class Api:
         self.s.headers['deviceosversion'] = self.DEVICE_OS_VERSION
         self.s.headers['X-Device-OS-Version'] = self.DEVICE_OS_VERSION
 
+        self.domain = domain
+
+    def getApiBaseUrl(self, useUapi: bool = False)-> str:
+        # Extracted from Android app: es.filmin.app.injector.modules.RestApiUrlProviderEx
+        subdomain = "uapi" if useUapi else "api"
+        host = "filminlatino" if self.domain == 'mx' else 'filmin'
+        return f"https://{subdomain}.{host}.{self.domain}"
+
     def makeRequest(self, endpoint: str, method = 'GET', body: dict = {}, query: dict = {}, useUapi: bool = False):
-        base_url = self.UAPI_URL if useUapi else self.API_URL
+        base_url = self.getApiBaseUrl(useUapi)
         res = self.s.request(method, base_url + endpoint, json=body, params=query)
         res_json = res.json()
         if res.ok:
@@ -38,8 +46,7 @@ class Api:
 
         if useUapi:
             raise UApiException(res_json['error'])
-        else:
-            raise ApiV3Exception(res_json['errors'])
+        raise ApiV3Exception(res_json['errors'])
 
     def login(self, username: str, password: str)-> dict:
         res = self.makeRequest('/oauth/access_token', 'POST', {

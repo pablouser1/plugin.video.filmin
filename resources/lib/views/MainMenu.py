@@ -9,30 +9,30 @@ class MainMenu(Base):
     items = [
         {
             "id": "search",
-            "title": config.getLocalizedString(40013)
+            "title": config.getLocalizedString(40020)
         },
         {
             "id": "watching",
-            "title": config.getLocalizedString(40018)
+            "title": config.getLocalizedString(40021)
         },
         {
             "id": "catalog",
-            "title": config.getLocalizedString(40014)
+            "title": config.getLocalizedString(40022)
         },
         {
             "id": "purchased",
-            "title": config.getLocalizedString(40015)
+            "title": config.getLocalizedString(40023)
         },
         {
             "id": "highlighteds",
-            "title": config.getLocalizedString(40016)
+            "title": config.getLocalizedString(40024)
         },
         {
             "id": "collections",
-            "title": config.getLocalizedString(40017)
+            "title": config.getLocalizedString(40025)
         },
         {
             "id": "playlists",
-            "title": config.getLocalizedString(40019)
+            "title": config.getLocalizedString(40026)
         }
     ]

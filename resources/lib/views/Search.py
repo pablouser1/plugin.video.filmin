@@ -1,6 +1,6 @@
 import xbmcgui
 from .Base import Base
-from ..common import api
+from ..common import api, config
 
 class Search(Base):
     """
@@ -11,6 +11,6 @@ class Search(Base):
     has_videos = True
 
     def setItems(self):
-        search_term = xbmcgui.Dialog().input('Search', type=xbmcgui.INPUT_ALPHANUM)
+        search_term = xbmcgui.Dialog().input(config.getLocalizedString(40020), type=xbmcgui.INPUT_ALPHANUM)
         if search_term:
             self.items = api.search(search_term)

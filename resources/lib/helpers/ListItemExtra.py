@@ -1,5 +1,6 @@
 from xbmcgui import ListItem
 from .Art import Art
+from ..common import config
 
 class ListItemExtra:
     @staticmethod
@@ -54,7 +55,7 @@ class ListItemExtra:
         }
 
         if item.get('is_premier', False):
-            info['plot'] += '\n\n(PARA ALQUILAR)'
+            info['plot'] += f'\n\n({config.getLocalizedString(40047)})'
 
         list_item.setInfo('video', info)
         # ART

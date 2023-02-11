@@ -2,13 +2,32 @@ import requests
 from xbmc import getLanguage, ISO_639_1
 from .exceptions.ApiV3Exception import ApiV3Exception
 from .exceptions.UApiException import UApiException
+from .exceptions.DialogException import DialogException
 
 class Api:
     s = requests.Session()
 
-    # Both extracted from the Android app
-    CLIENT_ID = "zXZXrpum7ayGcWlo"
-    CLIENT_SECRET = "yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm"
+    # Taken from es.filmin.app.BuildConfig
+    TOKENS = {
+        # Spain
+        'es': {
+            'CLIENT_ID': 'zXZXrpum7ayGcWlo',
+            'CLIENT_SECRET': 'yICstBCQ8CKB8RF6KuDmr9R20xtfyYbm'
+        },
+        # Portugal
+        'pt': {
+            'CLIENT_ID': 'zhiv2IKILLYNZ3pq',
+            'CLIENT_SECRET': 'kzPKMK2aXJzFoHNWOCR6gcd60WTK1BL3'
+        },
+        # México
+        'mx': {
+            'CLIENT_ID': 'sse7QwjpcNoZgGZO',
+            'CLIENT_SECRET': '2yqTm7thQLc2NQUQSbKehn7xrg1Pi59q'
+        }
+    }
+
+    CLIENT_ID = ""
+    CLIENT_SECRET = ""
 
     DEVICE_MODEL = 'Kodi'
     DEVICE_OS_VERSION = '12'
@@ -17,7 +36,6 @@ class Api:
     domain = 'es'
 
     def __init__(self, domain: str):
-        self.s.headers["X-Client-Id"] = self.CLIENT_ID
         self.s.headers["clientlanguage"] = getLanguage(ISO_639_1, True)
 
         self.s.headers["clientversion"] = self.CLIENT_VERSION
@@ -30,6 +48,11 @@ class Api:
         self.s.headers['X-Device-OS-Version'] = self.DEVICE_OS_VERSION
 
         self.domain = domain
+        tokens = self.TOKENS[domain]
+        self.CLIENT_ID = tokens['CLIENT_ID']
+        self.CLIENT_SECRET = tokens['CLIENT_SECRET']
+
+        self.s.headers["X-Client-Id"] = self.CLIENT_ID
 
     def getApiBaseUrl(self, useUapi: bool = False)-> str:
         # Extracted from Android app: es.filmin.app.injector.modules.RestApiUrlProviderEx
@@ -40,6 +63,10 @@ class Api:
     def makeRequest(self, endpoint: str, method = 'GET', body: dict = {}, query: dict = {}, useUapi: bool = False):
         base_url = self.getApiBaseUrl(useUapi)
         res = self.s.request(method, base_url + endpoint, json=body, params=query)
+        # Avoid non JSON response
+        if res.headers.get('Content-Type') != 'application/json':
+            raise DialogException('Non JSON response')
+
         res_json = res.json()
         if res.ok:
             return res_json

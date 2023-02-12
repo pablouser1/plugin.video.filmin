@@ -194,6 +194,11 @@ class Api:
         streams = {}
         # -- Single feed -- #
         if not 'feeds' in res:
+            if 'FLVURL' in res:
+                # Add support for v1 (DRM-Free) video
+                res['src'] = res['FLVURL']
+                res['type'] = 'FLVURL'
+
             # We have to convert it to the multi-feed response
             streams = {
                 'feeds': [res],

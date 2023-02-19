@@ -7,12 +7,12 @@ class Mediamark:
     AUTH_TOKEN = "Njk1MzM5MjAtNDVmNi0xMWUzLThmOTYtMDgwMDIwMGM5YTY2" # I -- THINK -- this is hardcoded, I hope so.
     s = requests.Session()
     TOKEN = ''
-    USER_ID = 0
+    USER_ID = -1
     PROFILE_ID = ''
-    MEDIA_ID = 0
-    VERSION_ID = 0
-    MEDIA_VIEWING_ID = 0
-    SESSION_ID = 0
+    MEDIA_ID = -1
+    VERSION_ID = -1
+    MEDIA_VIEWING_ID = -1
+    SESSION_ID = -1
 
     DEVICE_MODEL = 'Kodi'
     DEVICE_OS_VERSION = '12'

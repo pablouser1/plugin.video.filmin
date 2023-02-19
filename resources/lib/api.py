@@ -3,6 +3,7 @@ from xbmc import getLanguage, ISO_639_1
 from .exceptions.ApiV3Exception import ApiV3Exception
 from .exceptions.UApiException import UApiException
 from .exceptions.DialogException import DialogException
+from .helpers.Misc import isDrm
 
 class Api:
     s = requests.Session()
@@ -194,9 +195,9 @@ class Api:
         streams = {}
         # -- Single feed -- #
         if not 'feeds' in res:
-            if 'FLVURL' in res:
+            if not isDrm(res.get('type', 'FLVURL')):
                 # Add support for v1 (DRM-Free) video
-                res['src'] = res['FLVURL']
+                res['src'] = res.get('FLVURL') or res.get('src')
                 res['type'] = 'FLVURL'
 
             # We have to convert it to the multi-feed response

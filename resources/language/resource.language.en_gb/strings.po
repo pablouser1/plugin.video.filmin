@@ -107,6 +107,10 @@ msgctxt "#40026"
 msgid "Playlists"
 msgstr "Playlists"
 
+msgctxt "#40027"
+msgid "Watch later"
+msgstr "Watch later"
+
 # -- session.py -- #
 msgctxt "#40030"
 msgid "Write your username/email"

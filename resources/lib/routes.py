@@ -64,6 +64,11 @@ def _episodes(season_id: int, show_id: int):
     from .views.Episodes import Episodes
     Episodes(season_id, show_id).run()
 
+@dispatcher.register(ROUTES.WATCHLATER)
+def _watchLater():
+    from .views.WatchLater import WatchLater
+    WatchLater().run()
+
 @dispatcher.register(ROUTES.PLAYER, ['id'])
 def _player(item_id: int):
     from .player.Handler import Play

@@ -13,5 +13,6 @@ ROUTES = enum(
     COLLECTION='collection',
     SEASONS='seasons',
     EPISODES='episodes',
+    WATCHLATER='watchlater',
     PLAYER='player'
 )

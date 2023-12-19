@@ -185,6 +185,10 @@ class Api:
 
         return items
 
+    def watchLater(self)-> list:
+        res = self.makeRequest(endpoint='/auth/watch-later', useUapi=True)
+        return res['data']
+
     def useTicket(self, item_id: int):
         self.makeRequest(endpoint='/user/tickets/activate', method='POST', body={
             'id': item_id

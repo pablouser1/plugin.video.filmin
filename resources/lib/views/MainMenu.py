@@ -34,5 +34,9 @@ class MainMenu(Base):
         {
             "id": "playlists",
             "title": config.getLocalizedString(40026)
+        },
+        {
+            "id": "watchlater",
+            "title": config.getLocalizedString(40027)
         }
     ]

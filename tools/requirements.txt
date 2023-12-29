@@ -1,0 +1,15 @@
+certifi==2023.11.17
+charset-normalizer==3.3.2
+colorama==0.4.6
+elementpath==4.1.5
+idna==3.6
+kodi-addon-checker==0.0.31
+mando==0.7.1
+packaging==23.2
+Pillow==10.1.0
+polib==1.2.0
+radon==6.0.1
+requests==2.31.0
+six==1.16.0
+urllib3==2.1.0
+xmlschema==2.5.1

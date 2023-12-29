@@ -31,7 +31,7 @@ jobs:
           path: 'plugin.video.filmin'
           directory: '..'
           filename: 'filmin-kodi-release.zip'
-          exclusions: '*.git* .editorconfig'
+          exclusions: '*.git* .editorconfig tools'
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:

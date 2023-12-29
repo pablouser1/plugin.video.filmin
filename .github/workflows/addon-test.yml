@@ -8,11 +8,17 @@ jobs:
     name: Kodi addon checker
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
-    - name: Kodi addon checker validation
-      id: kodi-addon-checker
-      uses: xbmc/action-kodi-addon-checker@v1.1
+      uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v5
       with:
-        kodi-version: matrix
-        is-pr: ${{ github.event_name == 'pull_request' }}
-        addon-id: ${{ github.event.repository.name }}
+        python-version: '3.11'
+        cache: 'pip'
+    - name: Install checker
+      run: pip install kodi-addon-checker
+    - name: Run checker push
+      run: kodi-addon-checker
+      if: ${{ github.event_name != 'pull_request' }}
+    - name: Run checker PR
+      run: kodi-addon-checker --PR
+      if: ${{ github.event_name == 'pull_request' }}

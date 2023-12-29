@@ -1,6 +1,6 @@
 from .dispatcher import Dispatcher
 from .constants import ROUTES
-from .common import params
+from .common import _PARAMS
 
 dispatcher = Dispatcher()
 
@@ -76,8 +76,8 @@ def _player(item_id: int):
     play.start()
 
 def dispatch():
-    if params.get('action'):
-        action = params.get('action')
+    if _PARAMS.get('action'):
+        action = _PARAMS.get('action')
         if action == 'logout':
             from .session import startLogout
             startLogout()
@@ -85,5 +85,5 @@ def dispatch():
             from .session import changeProfile
             changeProfile(notify=True)
     else:
-        mode = params.get('menu', 'home')
+        mode = _PARAMS.get('menu', 'home')
         dispatcher.run(mode)

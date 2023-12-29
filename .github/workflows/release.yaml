@@ -38,4 +38,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ steps.version.outputs.info }}
           body: ${{ steps.changelog.outputs.info }}
-          allowUpdates: true
+          skipIfReleaseExists: true

@@ -1,4 +1,4 @@
-from .common import params
+from .common import _PARAMS
 
 class Dispatcher:
     functions = {}
@@ -22,9 +22,9 @@ class Dispatcher:
         # Add args
         if self.args[route]:
             for arg in self.args[route]:
-                if arg not in params:
+                if arg not in _PARAMS:
                     raise Exception('Param not found in URL!')
 
-                args.append(params[arg])
+                args.append(_PARAMS[arg])
 
         self.functions[route](*args)

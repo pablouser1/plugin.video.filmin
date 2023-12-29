@@ -1,7 +1,7 @@
 import xbmcgui
 import xbmcplugin
 
-from ..common import _HANDLE, _URL, params
+from ..common import _HANDLE, _URL, _PARAMS
 from .Types import Types
 from .ListItemExtra import ListItemExtra
 
@@ -48,7 +48,7 @@ class Render:
             url = '{0}?menu={1}&id={2}'.format(_URL, menu, item["id"])
             if menu == 'episodes':
                 # Add show id to URL
-                url += '&item_id={0}'.format(params['id'])
+                url += '&item_id={0}'.format(_PARAMS['id'])
             list_item = ListItemExtra.folder(url, item)
             listing.append((url, list_item, True))
         return listing

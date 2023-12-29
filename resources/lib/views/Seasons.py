@@ -1,5 +1,5 @@
 from .Base import Base
-from ..common import api, params
+from ..common import api
 
 class Seasons(Base):
     folders_goTo = 'episodes'

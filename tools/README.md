@@ -11,7 +11,7 @@ pip3 install -r requirements.txt
 ## Checker
 Puedes ejecutar manualmente los tests con el comando
 ```bash
-kodi-addon-checker ..
+kodi-addon-checker --branch matrix ..
 ```
 
 NOTA: Usamos el path `..` para ir al directorio raíz donde está el addon

@@ -32,7 +32,7 @@ class Play():
         """
         versions_api = self.item['versions']['data']
         # Exclude offline versions
-        versions_filtered = list(filter(lambda version: not version['offline'], versions_api))
+        versions_filtered = [version for version in versions_api if not version['offline']]
         versions_show = []
         for version_temp in versions_filtered:
             label = '{0} - {1}'.format(version_temp['name'], version_temp['rightType']['name'])

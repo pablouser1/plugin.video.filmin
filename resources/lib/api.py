@@ -123,7 +123,7 @@ class Api:
         })
 
         # Return only allowed items (tvshows, movies...)
-        return filter(lambda item: 'type' in item, res['data'])
+        return [item for item in res['data'] if 'type' in item]
 
     def purchased(self)-> list:
         res = self.makeRequest(endpoint='/user/purchased/medias')

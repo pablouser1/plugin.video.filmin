@@ -17,8 +17,8 @@ jobs:
     - name: Install checker
       run: pip install kodi-addon-checker
     - name: Run checker push
-      run: kodi-addon-checker
+      run: kodi-addon-checker --branch matrix
       if: ${{ github.event_name != 'pull_request' }}
     - name: Run checker PR
-      run: kodi-addon-checker --PR
+      run: kodi-addon-checker --branch matrix --PR
       if: ${{ github.event_name == 'pull_request' }}

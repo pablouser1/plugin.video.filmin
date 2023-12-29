@@ -21,7 +21,7 @@ class Base:
     pages = False
 
     """
-    True if is an static menu with predefined items
+    True if is an static route with predefined items
     """
     static = False
 
@@ -51,7 +51,7 @@ class Base:
         Renders folder depending of config
         """
         listing = []
-        # Render static menu
+        # Render static route
         if self.static:
             listing = Render.static(self.items)
         else:

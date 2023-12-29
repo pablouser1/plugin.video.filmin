@@ -14,5 +14,7 @@ ROUTES = enum(
     SEASONS='seasons',
     EPISODES='episodes',
     WATCHLATER='watchlater',
-    PLAYER='player'
+    PLAYER='player',
+    LOGOUT='logout',
+    PROFILE='profile'
 )

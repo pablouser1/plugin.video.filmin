@@ -75,15 +75,16 @@ def _player(item_id: int):
     play = Play(item_id)
     play.start()
 
+@dispatcher.register(ROUTES.LOGOUT)
+def _logout():
+    from .session import startLogout
+    startLogout()
+
+@dispatcher.register(ROUTES.PROFILE)
+def _profile():
+    from .session import changeProfile
+    changeProfile(notify=True)
+
 def dispatch():
-    if _PARAMS.get('action'):
-        action = _PARAMS.get('action')
-        if action == 'logout':
-            from .session import startLogout
-            startLogout()
-        elif action == 'profile':
-            from .session import changeProfile
-            changeProfile(notify=True)
-    else:
-        mode = _PARAMS.get('menu', 'home')
-        dispatcher.run(mode)
+    route = _PARAMS.get('route', 'home')
+    dispatcher.run(route)

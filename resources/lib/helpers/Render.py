@@ -17,7 +17,7 @@ class Render:
             info = {
                 "title": item["title"]
             }
-            url = '{0}?menu={1}'.format(_URL, item["id"])
+            url = '{0}?route={1}'.format(_URL, item["id"])
             list_item.setInfo('video', info)
             listing.append((url, list_item, True))
 
@@ -30,23 +30,23 @@ class Render:
         """
         listing = []
         for item in items:
-            url = '{0}?menu=player&id={1}'.format(_URL, item["id"])
+            url = '{0}?route=player&id={1}'.format(_URL, item["id"])
             list_item = ListItemExtra.video(url, item)
             listing.append((url, list_item, False))
         return listing
 
     @staticmethod
-    def folders(items: list, menu: str = '')-> list:
+    def folders(items: list, route: str = '')-> list:
         """
         Render folders fetched from Filmin API
         """
         listing = []
         for item in items:
-            if not menu:
+            if not route:
                 if item['type'] == Types.folders[0]:
-                    menu = 'seasons'
-            url = '{0}?menu={1}&id={2}'.format(_URL, menu, item["id"])
-            if menu == 'episodes':
+                    route = 'seasons'
+            url = '{0}?route={1}&id={2}'.format(_URL, route, item["id"])
+            if route == 'episodes':
                 # Add show id to URL
                 url += '&item_id={0}'.format(_PARAMS['id'])
             list_item = ListItemExtra.folder(url, item)

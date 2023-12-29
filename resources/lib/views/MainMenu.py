@@ -3,7 +3,7 @@ from ..common import config
 
 class MainMenu(Base):
     """
-    Main menu, default menu. Does not have a path string
+    Main menu, default route. Does not have a path string
     """
     static = True
     items = [

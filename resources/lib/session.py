@@ -1,38 +1,62 @@
-from xbmcgui import Dialog, ListItem
-from .common import api, config
+"""
+Auth module:
+Login, change profiles and logout
+"""
 
-def askLogin():
-    username = Dialog().input(config.getLocalizedString(40030))
-    password = Dialog().input(config.getLocalizedString(40031))
+from xbmcgui import Dialog, ListItem
+from .common import api, settings
+
+
+def ask_login():
+    """
+    Dialog auth and try to login
+    If OK set access token and profile token both in memory and disk
+    """
+
+    username = Dialog().input(settings.get_localized_string(40030))
+    password = Dialog().input(settings.get_localized_string(40031))
     if username and password:
         res = api.login(username, password)
-        api.setToken(res['access_token'])
-        changeProfile()
+        api.setToken(res["access_token"])
+        change_profile()
         user = api.user()
-        config.setAuth(res['access_token'], res['refresh_token'], username, user['id'])
-        Dialog().ok('OK', config.getLocalizedString(40032))
+        settings.set_auth(
+            res["access_token"], res["refresh_token"], username, user["id"]
+        )
+        Dialog().ok("OK", settings.get_localized_string(40032))
 
-def changeProfile(notify: bool = False):
+
+def change_profile(notify: bool = False):
+    """
+    Gets all user's profiles and asks the user to choose one
+    If succesful save to memory and disk
+    """
+
     items = []
     res = api.profiles()
 
-    profiles = res['data']
+    profiles = res["data"]
 
     for profile in profiles:
-        item = ListItem(label=profile['name'])
+        item = ListItem(label=profile["name"])
         items.append(item)
-    index = Dialog().select(config.getLocalizedString(40033), items)
-    profile_id = profiles[index]['id']
+    index = Dialog().select(settings.get_localized_string(40033), items)
+    profile_id = profiles[index]["id"]
 
-    api.setProfileId(profile_id)
-    config.setProfileId(profile_id)
+    api.set_profile_id(profile_id)
+    settings.set_profile_id(profile_id)
 
     if notify:
-        Dialog().ok('OK', config.getLocalizedString(40034))
+        Dialog().ok("OK", settings.get_localized_string(40034))
 
-def startLogout():
-    config.setAuth('', '', '', 0)
-    config.setProfileId('')
-    api.setToken('')
-    api.setProfileId('')
-    Dialog().ok('OK', config.getLocalizedString(40035))
+
+def start_logout():
+    """
+    Wipe all login-related data
+    """
+
+    settings.set_auth("", "", "", 0)
+    settings.set_profile_id("")
+    api.set_token("")
+    api.set_profile_id("")
+    Dialog().ok("OK", settings.get_localized_string(40035))

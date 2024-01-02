@@ -31,7 +31,7 @@ msgstr "Región"
 
 msgctxt "#40003"
 msgid "Allow syncing with Filmin"
-msgstr "Permitir sincronización de visionado con Filmin"
+msgstr "Permitir sincronización de visionado con Filmin (ROTO, IGNORADO POR AHORA)"
 
 msgctxt "#40004"
 msgid "Allow using tickets"
@@ -175,7 +175,7 @@ msgid "Tickets"
 msgstr "Tickets"
 
 msgctxt "#40051"
-msgid "This content is not avaiable. Do you want to rent it using a ticket? You have %d tickets left"
+msgid "This content is not available. Do you want to rent it using a ticket? You have %d tickets left"
 msgstr "Este contenido no está disponible. ¿Quieres alquilarlo usando un ticket? Tienes %d tickets restantes"
 
 msgctxt "#40052"

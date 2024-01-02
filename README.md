@@ -33,25 +33,13 @@ Descarga el archivo .zip generado por Github e instálalo.
 * Colecciones
 * Watching
 * Listas de reproducción
-* Sincronizar progreso de visionado con Filmin
+* Sincronizar progreso de visionado con Filmin (Roto por ahora)
 * Soporte para Portugal y México
 * Watch Later
 
 ### Prioridades
 * Integración con Up Next
-* Festivales
-* Ordenar
-
-## Desarrollo
-### Reversing
-#### Static
-Todos los tokens `CLIENT_ID` y `CLIENT_ID_SECRET` se encontraron decompilando la aplicación de Android.
-
-Personalmente uso [**jadx**](https://github.com/skylot/jadx) para la decompilación.
-
-#### Runtime
-Gran parte de los endpoints del archivo `api.py` se han encontrado interceptando las peticiones HTTPS de la aplicación de Android
-
-El setup que uso personalmente es:
-- [**mitmproxy**](https://mitmproxy.org), para interceptar las solicitudes
-- [**MagiskTrustCert**](https://github.com/NVISOsecurity/MagiskTrustUserCerts), módulo de [Magisk](https://github.com/topjohnwu/Magisk) para el tráfico HTTPS
+* Paginación
+* Adaptar más métodos de `api.py` a la nueva uapi
+* Migrar de `ListItem` a `InfoTagVideo`
+* Arreglar la sincronización con Filmin

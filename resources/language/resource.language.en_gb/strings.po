@@ -30,8 +30,8 @@ msgid "Region"
 msgstr "Region"
 
 msgctxt "#40003"
-msgid "Allow syncing with Filmin"
-msgstr "Allow syncing with Filmin"
+msgid "Allow syncing with Filmin (BROKEN, IGNORED FOR NOW)"
+msgstr "Allow syncing with Filmin (BROKEN, IGNORED FOR NOW)"
 
 msgctxt "#40004"
 msgid "Allow using tickets"
@@ -175,8 +175,8 @@ msgid "Tickets"
 msgstr "Tickets"
 
 msgctxt "#40051"
-msgid "This content is not avaiable. Do you want to rent it using a ticket? You have %d tickets left"
-msgstr "This content is not avaiable. Do you want to rent it using a ticket? You have %d tickets left"
+msgid "This content is not available. Do you want to rent it using a ticket? You have %d tickets left"
+msgstr "This content is not available. Do you want to rent it using a ticket? You have %d tickets left"
 
 msgctxt "#40052"
 msgid "Choose a version"

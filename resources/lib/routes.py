@@ -1,90 +1,115 @@
+""" Module with all available route functions """
+
 from .dispatcher import Dispatcher
-from .constants import ROUTES
-from .common import _PARAMS
+from .constants import Routes
 
 dispatcher = Dispatcher()
 
-@dispatcher.register(ROUTES.HOME)
+# pylint: disable=import-outside-toplevel
+
+
+@dispatcher.register(Routes.HOME)
 def _home():
-    from .views.MainMenu import MainMenu
+    from .views.mainmenu import MainMenu
     MainMenu().run()
 
-@dispatcher.register(ROUTES.CATALOG)
+
+@dispatcher.register(Routes.CATALOG)
 def _catalog():
-    from .views.Catalog import Catalog
+    from .views.catalog import Catalog
     Catalog().run()
 
-@dispatcher.register(ROUTES.SEARCH)
+
+@dispatcher.register(Routes.SEARCH)
 def _search():
-    from .views.Search import Search
+    from .views.search import Search
     Search().run()
 
-@dispatcher.register(ROUTES.PURCHASED)
+
+@dispatcher.register(Routes.PURCHASED)
 def _purchased():
-    from .views.Purchased import Purchased
+    from .views.purchased import Purchased
     Purchased().run()
 
-@dispatcher.register(ROUTES.WATCHING)
+
+@dispatcher.register(Routes.WATCHING)
 def _watching():
-    from .views.Watching import Watching
+    from .views.watching import Watching
     Watching().run()
 
-@dispatcher.register(ROUTES.HIGHLIGHTEDS)
+
+@dispatcher.register(Routes.HIGHLIGHTEDS)
 def _highlighteds():
-    from .views.Highlighteds import Highlighteds
+    from .views.highlighteds import Highlighteds
     Highlighteds().run()
 
-@dispatcher.register(ROUTES.PLAYLISTS)
+
+@dispatcher.register(Routes.PLAYLISTS)
 def _playlists():
-    from .views.Playlists import Playlists
+    from .views.playlists import Playlists
     Playlists().run()
 
-@dispatcher.register(ROUTES.PLAYLIST, ['id'])
+
+@dispatcher.register(Routes.PLAYLIST, ["id"])
 def _playlist(play_id: int):
-    from .views.Playlist import Playlist
+    from .views.playlist import Playlist
     Playlist(play_id).run()
 
-@dispatcher.register(ROUTES.COLLECTIONS)
+
+@dispatcher.register(Routes.COLLECTIONS)
 def _collections():
-    from .views.Collections import Collections
+    from .views.collections import Collections
     Collections().run()
 
-@dispatcher.register(ROUTES.COLLECTION, ['id'])
+
+@dispatcher.register(Routes.COLLECTION, ["id"])
 def _collection(collection_id: int):
-    from .views.Collection import Collection
+    from .views.collection import Collection
     Collection(collection_id).run()
 
-@dispatcher.register(ROUTES.SEASONS, ['id'])
+
+@dispatcher.register(Routes.SEASONS, ["id"])
 def _seasons(item_id: int):
-    from .views.Seasons import Seasons
+    from .views.seasons import Seasons
     Seasons(item_id).run()
 
-@dispatcher.register(ROUTES.EPISODES, ['id', 'item_id'])
+
+@dispatcher.register(Routes.EPISODES, ["id", "item_id"])
 def _episodes(season_id: int, show_id: int):
-    from .views.Episodes import Episodes
+    from .views.episodes import Episodes
     Episodes(season_id, show_id).run()
 
-@dispatcher.register(ROUTES.WATCHLATER)
-def _watchLater():
-    from .views.WatchLater import WatchLater
+
+@dispatcher.register(Routes.WATCHLATER)
+def _watch_later():
+    from .views.watchlater import WatchLater
     WatchLater().run()
 
-@dispatcher.register(ROUTES.PLAYER, ['id'])
+
+@dispatcher.register(Routes.PLAYER, ["id"])
 def _player(item_id: int):
-    from .player.Handler import Play
-    play = Play(item_id)
+    from .player.handler import PlayHandler
+    play = PlayHandler(item_id)
     play.start()
 
-@dispatcher.register(ROUTES.LOGOUT)
+
+@dispatcher.register(Routes.LOGOUT)
 def _logout():
-    from .session import startLogout
-    startLogout()
+    from .session import start_logout
+    start_logout()
 
-@dispatcher.register(ROUTES.PROFILE)
+
+@dispatcher.register(Routes.PROFILE)
 def _profile():
-    from .session import changeProfile
-    changeProfile(notify=True)
+    from .session import change_profile
+    change_profile(notify=True)
 
-def dispatch():
-    route = _PARAMS.get('route', 'home')
+
+def dispatch(params: dict):
+    """
+    Run dispatcher
+    Gets current route from params argument
+    """
+
+    route = params.get("route", Routes.HOME.value)
     dispatcher.run(route)

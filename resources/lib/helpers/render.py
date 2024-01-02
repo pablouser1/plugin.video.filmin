@@ -34,6 +34,7 @@ class Render:
         """
         Render videos fetched from Filmin API
         """
+
         listing = []
         for item in items:
             url = build_kodi_url(_URL, {
@@ -46,10 +47,14 @@ class Render:
         return listing
 
     @staticmethod
-    def folders(items: list, route: str = "") -> list:
+    def folders(
+        items: list,
+        route: str = ""
+    ) -> list:
         """
         Render folders fetched from Filmin API
         """
+
         listing = []
         for item in items:
             if not route:
@@ -72,7 +77,10 @@ class Render:
         return listing
 
     @staticmethod
-    def mix(items: list, go_to: str = "") -> list:
+    def mix(
+        items: list,
+        go_to: str = ""
+    ) -> list:
         """
         Render folder containing both folders and videos
         """

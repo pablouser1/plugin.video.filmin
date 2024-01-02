@@ -27,7 +27,7 @@ Descarga el archivo .zip generado por Github e instálalo.
 ## Roadmap
 ### Funciones agregadas
 * Autorización
-* Reproducción con DRM y sin DRM, pudiendo elegir audio y subtítulos
+* Reproducción con y sin DRM, pudiendo elegir audio y subtítulos
 * Búsqueda
 * Highlights
 * Colecciones

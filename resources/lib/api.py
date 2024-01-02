@@ -35,6 +35,8 @@ class Api:
         },
     }
 
+    LIMIT = 20
+
     client_id = ""
     client_secret = ""
 
@@ -153,6 +155,7 @@ class Api:
 
     def catalog(
         self,
+        page: int,
         item_type: str = "",
         genre: int = -1,
         subgenre: int = -1
@@ -165,15 +168,20 @@ class Api:
         if item_type:
             query["type"] = item_type
 
+        # Picked both genre and subgenre
         if genre != -1 and subgenre != -1:
             query["filter_entity"] = "tag"
             query["filter_id"] = subgenre
 
+        # Picked genre only
         if genre != -1 and subgenre == -1:
             query["filter_entity"] = "genre"
             query["filter_id"] = genre
 
-        res = self._req(endpoint="/media/catalog", query=query)
+        res = self._req(
+            endpoint="/media/catalog",
+            query=self._paginated_query(query, page)
+        )
         return res["data"]
 
     def search(self, term: str) -> list:
@@ -181,10 +189,12 @@ class Api:
         Search by title using a term
         """
 
-        res = self._req(endpoint="/searcher", query={"q": term})
+        res = self._req(endpoint="/search", query={
+            "query": term
+        }, uapi=True)
 
-        # Return only allowed items (tvshows, movies...)
-        return [item for item in res["data"] if "type" in item]
+        # Return only media
+        return [o for o in res["data"]["items"] if o.get('_type') == 'Media']
 
     def purchased(self) -> list:
         """
@@ -215,12 +225,15 @@ class Api:
         res = self._req(endpoint="/collections")
         return res["data"]
 
-    def collection(self, collection_id: int) -> list:
+    def collection(self, collection_id: int, page: int) -> list:
         """
         Get all media from a specific collection
         """
 
-        res = self._req(endpoint=f"/collections/{collection_id}/medias")
+        res = self._req(
+            endpoint=f"/collections/{collection_id}/medias",
+            query=self._paginated_query({}, page)
+        )
         return res["data"]
 
     def watching(self) -> list:
@@ -334,3 +347,12 @@ class Api:
         """
 
         self.s.headers["x-user-profile-id"] = profile_id
+
+    def _paginated_query(self, query: dict, page: int) -> dict:
+        newQuery = {
+            **query,
+            'page': page,
+            'limit': self.LIMIT
+        }
+
+        return newQuery

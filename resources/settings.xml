@@ -82,7 +82,7 @@
           </control>
         </setting>
       </group>
-      <group id="tokens" label="40003">
+      <group id="tokens" label="40019">
         <setting id="access_token" type="string" label="40017">
           <level>2</level>
           <default />

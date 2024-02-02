@@ -78,6 +78,10 @@ msgctxt "#40018"
 msgid "Refresh token"
 msgstr "Refresh token"
 
+msgctxt "#40019"
+msgid "Tokens"
+msgstr "Tokens"
+
 # -- Main menu -- #
 msgctxt "#40020"
 msgid "Search"

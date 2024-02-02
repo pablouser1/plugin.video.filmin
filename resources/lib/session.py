@@ -50,6 +50,7 @@ def change_profile(notify: bool = False):
     if notify:
         Dialog().ok("OK", settings.get_localized_string(40034))
 
+
 def ask_domain():
     """
     Let user pick a domain from a constant list

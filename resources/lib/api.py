@@ -240,8 +240,8 @@ class Api:
 
         items = []
         res = self._req(endpoint="/auth/keep-watching", uapi=True)
-        for item in res["data"]:
-            items.append(item["media"])
+
+        items = [x["media"] for x in res["data"]]
 
         return items
 

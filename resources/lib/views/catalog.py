@@ -16,6 +16,8 @@ class Catalog(Base):
     subgenre_id: int
 
     def set_state(self):
+        # TODO: Split and make more readable
+
         item_type = _PARAMS.get("item_type")
         genre_id = int(_PARAMS.get("genre_id", -1))
         subgenre_id = int(_PARAMS.get("subgenre_id", -1))

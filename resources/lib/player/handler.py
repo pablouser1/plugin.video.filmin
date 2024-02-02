@@ -104,8 +104,7 @@ class PlayHandler:
                 "inputstream.adaptive.license_type", self.DRM)
             play_item.setProperty(
                 "inputstream.adaptive.license_key",
-                stream["license_url"] + "||R{SSM}|"
-            )
+                stream["license_url"] + "||R{SSM}|")
 
         # Start playing
         monitor = Monitor()

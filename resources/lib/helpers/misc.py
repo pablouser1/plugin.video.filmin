@@ -3,11 +3,6 @@
 from urllib.parse import urlencode
 
 
-def enum(**enums):
-    """Emulate enum type"""
-    return type("Enum", (), enums)
-
-
 def is_drm(stream_type: str) -> bool:
     """Checks if stream has DRM"""
     return stream_type in ["dash+http+widevine", "dash+https+widevine"]

@@ -1,10 +1,11 @@
+# flake8: noqa
 import json
 import sys
 import os
 
 PARENT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.append(PARENT_PATH)  # Add parent path to searchable list
-from resources.lib.api import Api  # noqa: E402
+from resources.lib.api import Api
 
 
 def prettyPrint(data):

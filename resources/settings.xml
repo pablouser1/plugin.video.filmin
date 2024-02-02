@@ -4,21 +4,6 @@
     <!-- General -->
     <category id="general" label="40000">
       <group id="features" label="40001">
-        <setting id="domain" type="string" label="40002">
-        	<level>0</level>
-        	<default>es</default>
-        	<constraints>
-        		<options>
-        			<option>es</option>
-        			<option>pt</option>
-        			<option>mx</option>
-        		</options>
-        		<allowempty>false</allowempty>
-        	</constraints>
-        	<control type="list" format="string">
-        		<heading>40002</heading>
-        	</control>
-        </setting>
         <setting id="sync" type="boolean" label="40003">
           <level>0</level>
           <default>false</default>
@@ -66,16 +51,32 @@
           </constraints>
           <control type="edit" format="string" />
         </setting>
+        <setting id="domain" type="string" label="40002">
+        	<level>0</level>
+        	<default>es</default>
+          <enable>false</enable>
+        	<constraints>
+        		<options>
+        			<option>es</option>
+        			<option>pt</option>
+        			<option>mx</option>
+        		</options>
+        		<allowempty>false</allowempty>
+        	</constraints>
+        	<control type="list" format="string">
+        		<heading>40002</heading>
+        	</control>
+        </setting>
         <setting id="change_profile" type="action" label="40015">
           <level>0</level>
-          <data>RunPlugin(plugin://$ID?action=profile)</data>
+          <data>RunPlugin(plugin://$ID?route=profile)</data>
           <control type="button" format="action">
             <close>true</close>
           </control>
         </setting>
         <setting id="logout" type="action" label="40016">
           <level>0</level>
-          <data>RunPlugin(plugin://$ID?action=logout)</data>
+          <data>RunPlugin(plugin://$ID?route=logout)</data>
           <control type="button" format="action">
             <close>true</close>
           </control>

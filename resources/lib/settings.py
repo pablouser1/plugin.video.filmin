@@ -93,3 +93,10 @@ class Settings:
         """
 
         self.addon.setSettingString("profile_id", profile_id)
+
+    def set_domain(self, domain: str):
+        """
+        Saves domain to disk
+        """
+
+        self.addon.setSettingString("domain", domain)

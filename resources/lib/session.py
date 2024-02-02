@@ -5,6 +5,7 @@ Login, change profiles and logout
 
 from xbmcgui import Dialog, ListItem
 from .common import api, settings
+from .constants import Domains
 
 
 def ask_login():
@@ -48,6 +49,16 @@ def change_profile(notify: bool = False):
 
     if notify:
         Dialog().ok("OK", settings.get_localized_string(40034))
+
+def ask_domain():
+    """
+    Let user pick a domain from a constant list
+    """
+
+    index = Dialog().select(settings.get_localized_string(40002), Domains)
+    domain = Domains[index]
+    api.set_domain(domain)
+    settings.set_domain(domain)
 
 
 def start_logout():

@@ -29,3 +29,5 @@ class MediaTypes(Enum):
 
     VIDEOS = ("short", "film", "episode")
     FOLDERS = ("serie", "season")
+
+Domains = ["es", "pt", "mx"]

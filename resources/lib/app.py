@@ -1,7 +1,7 @@
 """ Module entrypoint """
 
 from .routes import dispatch
-from .session import ask_login
+from .session import ask_login, ask_domain
 from .common import settings, api, _PARAMS
 
 
@@ -15,6 +15,7 @@ def run():
         api.set_token(token_info["access"])
         api.set_profile_id(profile_id)
     else:
+        ask_domain()
         ask_login()
 
     # Run view

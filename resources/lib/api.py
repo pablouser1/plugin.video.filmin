@@ -48,10 +48,7 @@ class Api:
         Headers.set_old(self.s)
         Headers.set_new(self.s)
 
-        self.domain = domain
-        tokens = self.TOKENS[domain]
-        self.client_id = tokens["CLIENT_ID"]
-        self.client_secret = tokens["CLIENT_SECRET"]
+        self.set_domain(domain)
 
         self.s.headers["X-Client-Id"] = self.client_id
 
@@ -348,11 +345,21 @@ class Api:
 
         self.s.headers["x-user-profile-id"] = profile_id
 
+    def set_domain(self, domain: str):
+        """
+        Set domain and change client_id and client_secret
+        """
+
+        self.domain = domain
+        tokens = self.TOKENS[domain]
+        self.client_id = tokens["CLIENT_ID"]
+        self.client_secret = tokens["CLIENT_SECRET"]
+
     def _paginated_query(self, query: dict, page: int) -> dict:
-        newQuery = {
+        new_query = {
             **query,
             'page': page,
             'limit': self.LIMIT
         }
 
-        return newQuery
+        return new_query

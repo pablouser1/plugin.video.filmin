@@ -26,11 +26,6 @@
     <news>
     v1.7.1 (02/02/2024)
     - Hotfix, arreglado AttributeError al iniciar sesión
-    v1.7.0 (02/01/2024)
-    - Sincronización con Filmin deshabilitada temporalmente
-    - Refactoring del código siguiendo los estándares PEP
-    - enums convertidos a enums del standard lib
-    - Config renombrado a Settings, junto con la global config
     </news>
     <assets>
       <icon>resources/icon.png</icon>

@@ -11,21 +11,21 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event_name != 'pull_request' }} # Run if tests went ok and not a pull request
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v6
       - name: Get Version
         id: version
-        uses: howbout-ltd/get-xml-info@master
+        uses: mavrosxristoforos/get-xml-info@1.0
         with:
           xml-file: "addon.xml"
           xpath: "//addon/@version"
       - name: Get changelog
         id: changelog
-        uses: howbout-ltd/get-xml-info@master
+        uses: mavrosxristoforos/get-xml-info@1.0
         with:
           xml-file: "addon.xml"
           xpath: "//addon/extension[2]/news"
       - name: Archive Release
-        uses: thedoctor0/zip-release@master
+        uses: thedoctor0/zip-release@0.7.5
         with:
           type: 'zip'
           path: 'plugin.video.filmin'

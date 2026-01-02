@@ -3,6 +3,7 @@ from ..helpers.headers import Headers
 from ..exceptions.apiv3 import ApiV3Exception
 from ..exceptions.uapi import UApiException
 from ..exceptions.dialog import DialogException
+import xbmc
 
 
 class Sender:
@@ -66,6 +67,7 @@ class Sender:
 
         # Avoid non JSON response
         if res.headers.get("Content-Type") != "application/json":
+            xbmc.log(f"Non JSON response: {res.text}", xbmc.LOGERROR)
             raise DialogException("Non JSON response")
 
         res_json = res.json()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.filmin" name="Filmin" version="1.7.2" provider-name="pablouser1">
+<addon id="plugin.video.filmin" name="Filmin" version="1.7.3" provider-name="pablouser1">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
     <import addon="script.module.requests" version="2.22.0+matrix.1" />
@@ -24,10 +24,9 @@
     <website>https://www.filmin.es/</website>
     <source>https://github.com/pablouser1/plugin.video.filmin</source>
     <news>
-    v1.7.2 (02/02/2024)
-    - Arreglados botones de cerrar sesión y cambiar de perfil
-    - Ahora la región se elige al iniciar sesión, en los ajustes aparecerá en sólo lectura
-    - Capturas de pantalla
+    v1.7.3 (02/01/2026)
+    - Reestructuración interna de API de Filmin
+    - Loggeo de respuesta en caso de no ser JSON
     </news>
     <assets>
       <icon>resources/icon.png</icon>

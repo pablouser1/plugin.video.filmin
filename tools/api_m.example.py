@@ -13,8 +13,9 @@ def prettyPrint(data):
 
 
 DOMAIN = "es"
+LANG = "es"
 
-api = Api(DOMAIN)
+api = Api(DOMAIN, LANG)
 
 # .. You can keep testing the api here
-prettyPrint(api.collection.all())
+prettyPrint(api.discover.genres())

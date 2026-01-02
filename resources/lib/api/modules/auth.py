@@ -9,8 +9,8 @@ class AuthModule(BaseModule):
         res = self.sender.req(
             "/oauth/access_token",
             body={
-                "client_id": self.client_id,
-                "client_secret": self.client_secret,
+                "client_id": self.sender.client_id,
+                "client_secret": self.sender.client_secret,
                 "grant_type": "password",
                 "password": password,
                 "username": username,

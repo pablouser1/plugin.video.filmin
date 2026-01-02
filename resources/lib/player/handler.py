@@ -23,7 +23,7 @@ class PlayHandler:
     can_watch = True
 
     def __init__(self, el_id: int):
-        self.item = api.media_simple(el_id)
+        self.item = api.media.simple(el_id)
         if "can_watch" in self.item["user_data"]:
             can_watch = self.item["user_data"]["can_watch"]
             self.can_watch = len(can_watch["data"]) > 0
@@ -33,14 +33,14 @@ class PlayHandler:
         Asks user if they want to buy media, send request if true
         """
 
-        user = api.user()
+        user = api.auth.user()
         tickets = len(user["tickets"]["data"])
         self.can_watch = Dialog().yesno(
             settings.get_localized_string(40050),
             settings.get_localized_string(40051) % tickets,
         )
         if self.can_watch:
-            api.use_tickets(self.item["id"])
+            api.purchase.use_ticket(self.item["id"])
 
     def version_picker(self) -> dict:
         """
@@ -80,7 +80,7 @@ class PlayHandler:
             subtitles.append(subtitle["subtitleFiles"]["data"][0]["path"])
 
         # Handle stream
-        streams = api.streams(version["id"])
+        streams = api.media.streams(version["id"])
         stream = streams["feeds"][0]
 
         # Handle PlayItem

@@ -17,10 +17,10 @@ def ask_login():
     username = Dialog().input(settings.get_localized_string(40030))
     password = Dialog().input(settings.get_localized_string(40031))
     if username and password:
-        res = api.login(username, password)
+        res = api.auth.login(username, password)
         api.set_token(res["access_token"])
         change_profile()
-        user = api.user()
+        user = api.auth.user()
         settings.set_auth(
             res["access_token"], res["refresh_token"], username, user["id"]
         )
@@ -34,7 +34,7 @@ def change_profile(notify: bool = False):
     """
 
     items = []
-    res = api.profiles()
+    res = api.auth.profiles()
 
     profiles = res["data"]
 
@@ -69,6 +69,7 @@ def start_logout():
 
     settings.set_auth("", "", "", 0)
     settings.set_profile_id("")
+    api.auth.logout()
     api.set_token("")
     api.set_profile_id("")
     Dialog().ok("OK", settings.get_localized_string(40035))

@@ -15,4 +15,4 @@ class Collection(Base):
         self.collection_id = col_id
 
     def set_items(self):
-        self.items = api.collection(self.collection_id, self.page)
+        self.items = api.collection.id(self.collection_id, self.page)

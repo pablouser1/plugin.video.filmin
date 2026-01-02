@@ -14,4 +14,4 @@ class Seasons(Base):
         self.item_id = item_id
 
     def set_items(self):
-        self.items = api.seasons(self.item_id)
+        self.items = api.media.seasons(self.item_id)

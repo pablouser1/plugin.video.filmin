@@ -10,4 +10,4 @@ class Collections(Base):
     folders_goTo = "collection"
 
     def set_items(self):
-        self.items = api.collections()
+        self.items = api.collection.all()

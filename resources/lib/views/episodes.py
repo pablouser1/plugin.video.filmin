@@ -15,4 +15,4 @@ class Episodes(Base):
         self.show_id = show_id
 
     def set_items(self):
-        self.items = api.episodes(self.show_id, self.season_id)
+        self.items = api.media.episodes(self.show_id, self.season_id)

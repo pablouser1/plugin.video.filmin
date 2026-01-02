@@ -10,4 +10,4 @@ class Watching(Base):
     has_videos = True
 
     def set_items(self):
-        self.items = api.watching()
+        self.items = api.watch.watching()

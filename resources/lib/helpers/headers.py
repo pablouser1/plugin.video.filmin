@@ -1,7 +1,6 @@
 """ Headers helper """
 
 from requests import Session
-from xbmc import getLanguage, ISO_639_1
 
 
 class Headers:
@@ -38,8 +37,8 @@ class Headers:
         })
 
     @staticmethod
-    def set_common(session: Session):
+    def set_common(session: Session, lang: str):
         """Updates session headers with keys common for both old and new"""
         session.headers.update({
-            "clientlanguage": getLanguage(ISO_639_1, True)
+            "clientlanguage": lang
         })

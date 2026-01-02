@@ -44,7 +44,7 @@ class Catalog(Base):
             # GENRE (Action, adventure...)
             genres = [
                 {"id": -1, "name": settings.get_localized_string(40043)}
-            ] + api.genres()
+            ] + api.discover.genres()
             genres_listitem = []
             for genre in genres:
                 listitem = xbmcgui.ListItem(label=genre["name"])
@@ -87,7 +87,7 @@ class Catalog(Base):
         }
 
     def set_items(self):
-        self.items = api.catalog(
+        self.items = api.discover.catalog(
             page=self.page,
             item_type=self.item_type,
             genre=self.genre_id,

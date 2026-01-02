@@ -10,4 +10,4 @@ class Highlighteds(Base):
     has_videos = True
 
     def set_items(self):
-        self.items = api.highlighteds()
+        self.items = api.discover.highlighteds()

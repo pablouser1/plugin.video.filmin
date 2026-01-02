@@ -14,4 +14,4 @@ class Playlist(Base):
         self.playlist_id = play_id
 
     def set_items(self):
-        self.items = api.playlist(self.playlist_id)
+        self.items = api.playlist.id(self.playlist_id)

@@ -10,4 +10,4 @@ class WatchLater(Base):
     has_videos = True
 
     def set_items(self):
-        self.items = api.watch_later()
+        self.items = api.watch.later()

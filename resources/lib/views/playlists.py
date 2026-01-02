@@ -10,4 +10,4 @@ class Playlists(Base):
     folders_goTo = "playlist"
 
     def set_items(self):
-        self.items = api.playlists()
+        self.items = api.playlist.all()

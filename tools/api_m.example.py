@@ -17,4 +17,4 @@ DOMAIN = "es"
 api = Api(DOMAIN)
 
 # .. You can keep testing the api here
-prettyPrint(api.collections())
+prettyPrint(api.collection.all())

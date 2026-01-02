@@ -1,7 +1,7 @@
 """ Mediamark module """
 
 import requests
-from ..common import settings
+from ..common import settings, _LANG
 from ..models.mediamark_data import MediamarkData
 from ..helpers.headers import Headers
 
@@ -19,7 +19,7 @@ class Mediamark:
 
     def __init__(self, mm_data: MediamarkData):
         self.mm_data = mm_data
-        Headers.set_common(self.s)
+        Headers.set_common(self.s, _LANG)
         Headers.set_old(self.s)
 
         self.s.headers["Authorization"] = f"Token {self.AUTH_TOKEN}"

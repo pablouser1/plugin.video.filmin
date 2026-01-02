@@ -11,4 +11,4 @@ class Purchased(Base):
     has_videos = True
 
     def set_items(self):
-        self.items = api.purchased()
+        self.items = api.purchase.available()

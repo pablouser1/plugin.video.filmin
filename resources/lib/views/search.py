@@ -28,4 +28,4 @@ class Search(Base):
 
     def set_items(self):
         if self.term != "":
-            self.items = api.search(self.term)
+            self.items = api.discover.search(self.term)

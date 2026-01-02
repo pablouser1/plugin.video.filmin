@@ -7,8 +7,8 @@ class Headers:
     """Common Filmin headers"""
 
     DEVICE_MODEL = "Kodi"
-    DEVICE_OS_VERSION = "12"
-    CLIENT_VERSION = "4.14.0"
+    DEVICE_OS_VERSION = "15"
+    CLIENT_VERSION = "5.20.1"
 
     @staticmethod
     def set_new(session: Session):

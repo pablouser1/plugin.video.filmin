@@ -14,13 +14,13 @@ jobs:
         uses: actions/checkout@v6
       - name: Get Version
         id: version
-        uses: mavrosxristoforos/get-xml-info@1.0
+        uses: howbout-ltd/get-xml-info@master
         with:
           xml-file: "addon.xml"
           xpath: "//addon/@version"
       - name: Get changelog
         id: changelog
-        uses: mavrosxristoforos/get-xml-info@1.0
+        uses: howbout-ltd/get-xml-info@master
         with:
           xml-file: "addon.xml"
           xpath: "//addon/extension[2]/news"

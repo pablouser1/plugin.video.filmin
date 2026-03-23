@@ -1,4 +1,5 @@
 from .base import BaseModule
+from ...helpers.misc import is_drm
 
 class MediaModule(BaseModule):
     def simple(self, item_id: int):

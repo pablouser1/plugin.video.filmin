@@ -1,4 +1,12 @@
 # Filmin Kodi
+> [!WARNING]
+> **¡Este repositorio se ha movido a Codeberg!**
+> 
+> Si eres un usuario de plugin.video.filmin no tienes que hacer nada, el addon se seguirá actualizando de forma automática.
+> 
+> Nuevo repositorio:
+> 🔗 **[codeberg.org/ferreiro/plugin.video.filmin](https://codeberg.org/ferreiro/plugin.video.filmin)**
+
 Reproduce tu contenido de Filmin favorito usando Kodi ≥ 19 (Matrix)
 
 ## Cómo instalar
